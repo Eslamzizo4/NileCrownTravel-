@@ -1,0 +1,21 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>لوحة إدارة Nile Crown Travel</title><link rel="stylesheet" href="style.css"><style>
+.admin{max-width:1000px;margin:auto;padding:50px 6%}.panel{background:#fff;padding:28px;border-radius:10px;box-shadow:0 8px 30px #0001;margin-bottom:22px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.panel input,.panel textarea,.panel select{width:100%;padding:12px;border:1px solid #d8cdbd;border-radius:5px;font-family:inherit}.full{grid-column:1/-1}.triprow{display:grid;grid-template-columns:1fr 150px 120px;gap:10px;align-items:center;border-bottom:1px solid #eee;padding:12px 0}.small{font-size:12px;color:#776d61}.danger{background:#7b3027;color:#fff;border:0;padding:9px 14px;border-radius:4px;cursor:pointer}.save{background:var(--gold);border:0;padding:12px 22px;border-radius:4px;font-weight:800;cursor:pointer}
+@media(max-width:650px){.grid,.triprow{grid-template-columns:1fr}.full{grid-column:auto}}
+</style></head><body><header class="nav"><a class="brand" href="index.html"><span class="crown">♛</span><span>Nile Crown<small>TRAVEL</small></span></a><a class="lang" href="index.html">الموقع</a></header>
+<main class="admin"><div class="section-head"><p class="eyebrow">ADMIN PANEL</p><h2>إدارة الرحلات والأسعار</h2><p>نسخة إدارة أولية تعمل محلياً. عند النشر سنربطها بقاعدة بيانات وتسجيل دخول آمن.</p></div>
+<div class="panel"><h3>إضافة / تعديل رحلة</h3><div class="grid"><input id="id" placeholder="معرّف الرحلة مثل luxor"><input id="title" placeholder="اسم الرحلة"><input id="category" placeholder="التصنيف"><input id="price" placeholder="السعر مثل 250 USD"><input id="image" class="full" placeholder="رابط صورة الرحلة"><textarea id="description" class="full" rows="4" placeholder="وصف الرحلة"></textarea></div><br><button class="save" onclick="saveTrip()">حفظ الرحلة</button> <button class="danger" onclick="clearForm()">مسح النموذج</button></div>
+<div class="panel"><h3>الرحلات الحالية</h3><div id="list"></div></div>
+<div class="panel"><h3>بيانات التواصل</h3><p>WhatsApp: <b>01010575983</b></p><p>Email: <b>ziade642@gmail.com</b></p><p class="small">للنشر الحقيقي: نربط اللوحة بقاعدة بيانات + تسجيل دخول آمن + تخزين صور.</p></div>
+</main><script>
+const key='nileCrownTrips';let trips=JSON.parse(localStorage.getItem(key)||'null')||[
+{id:'luxor',title:'الأقصر وأسوان',category:'Upper Egypt',price:'',image:'',description:'اكتشف معابد الأقصر وأسوان وآثار مصر القديمة.'},
+{id:'cruise',title:'رحلات نيلية',category:'Nile',price:'',image:'',description:'استمتع برحلة نيلية بين المدن التاريخية والمعابد.'},
+{id:'cairo',title:'القاهرة التاريخية',category:'History',price:'',image:'',description:'جولة بين أشهر معالم القاهرة وتجاربها الثقافية.'},
+{id:'redsea',title:'البحر الأحمر',category:'Red Sea',price:'',image:'',description:'شواطئ وطبيعة وتجارب بحرية.'}];
+function render(){document.getElementById('list').innerHTML=trips.map(t=>`<div class="triprow"><div><b>${t.title}</b><div class="small">${t.category} • ${t.price||'بدون سعر'}</div></div><button class="save" onclick="editTrip('${t.id}')">تعديل</button><button class="danger" onclick="delTrip('${t.id}')">حذف</button></div>`).join('')}
+function saveTrip(){let id=v('id'),title=v('title');if(!id||!title)return alert('اكتب المعرّف واسم الرحلة');let t={id,title,category:v('category'),price:v('price'),image:v('image'),description:v('description')};let i=trips.findIndex(x=>x.id===id);if(i>=0)trips[i]=t;else trips.push(t);localStorage.setItem(key,JSON.stringify(trips));render();clearForm();alert('تم الحفظ')}
+function editTrip(id){let t=trips.find(x=>x.id===id);['id','title','category','price','image','description'].forEach(k=>document.getElementById(k).value=t[k]||'');scrollTo(0,0)}
+function delTrip(id){if(confirm('حذف الرحلة؟')){trips=trips.filter(x=>x.id!==id);localStorage.setItem(key,JSON.stringify(trips));render()}}
+function clearForm(){['id','title','category','price','image','description'].forEach(k=>document.getElementById(k).value='')}
+function v(k){return document.getElementById(k).value.trim()}render();
+</script></body></html>

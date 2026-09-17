@@ -6,7 +6,11 @@ const SUPABASE_KEY =
 
 async function loadTrip() {
   const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+  let id = params.get("id");
+
+if (id === "luxor") {
+  id = "1";
+}
 
   const title = document.getElementById("title");
   const description = document.getElementById("description");

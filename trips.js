@@ -11,12 +11,19 @@ async function loadTrips() {
 
   if (!cards) return;
 
-  cards.innerHTML = "<p>جاري تحميل الرحلات...</p>";
+  const isEnglish =
+    document.documentElement.lang === "en";
+
+  cards.innerHTML =
+    isEnglish
+      ? "<p>Loading trips...</p>"
+      : "<p>جاري تحميل الرحلات...</p>";
 
   try {
 
     const response = await fetch(
-      SUPABASE_URL + "/rest/v1/trips?select=*&order=id.asc",
+      SUPABASE_URL +
+      "/rest/v1/trips?select=*&order=id.asc",
       {
         headers: {
           apikey: SUPABASE_KEY,
@@ -32,40 +39,49 @@ async function loadTrips() {
     const trips = await response.json();
 
     if (!trips.length) {
-      cards.innerHTML = "<p>لا توجد رحلات حاليًا.</p>";
+
+      cards.innerHTML =
+        isEnglish
+          ? "<p>No trips available at the moment.</p>"
+          : "<p>لا توجد رحلات حاليًا.</p>";
+
       return;
     }
 
 
     cards.innerHTML = trips.map(trip => {
 
-      const title =
-        trip.title_ar ||
-        trip.title_en ||
-        "رحلة";
+      const title = isEnglish
+        ? (trip.title_en || trip.title_ar || "Trip")
+        : (trip.title_ar || trip.title_en || "رحلة");
 
 
-      const description =
-        trip.description_ar ||
-        trip.description_en ||
-        "";
+      const description = isEnglish
+        ? (trip.description_en || trip.description_ar || "")
+        : (trip.description_ar || trip.description_en || "");
 
 
-      const price =
-        trip.price_ar ||
-        trip.price_en ||
-        "السعر غير محدد";
+      const price = isEnglish
+        ? (trip.price_en || trip.price_ar || "Price not specified")
+        : (trip.price_ar || trip.price_en || "السعر غير محدد");
 
 
       const image =
-        trip.image_ar ||
         trip.image_en ||
+        trip.image_ar ||
         "";
 
 
+      const priceLabel =
+        isEnglish
+          ? "Price:"
+          : "السعر:";
+
+
       return `
-        <a class="card"
-           href="trip.html?id=${encodeURIComponent(trip.id)}">
+        <a
+          class="card"
+          href="trip.html?id=${encodeURIComponent(trip.id)}">
 
           <div
             class="pic"
@@ -78,13 +94,21 @@ async function loadTrips() {
 
           <div class="card-body">
 
-            <span>Nile Crown Travel</span>
+            <span>
+              Nile Crown Travel
+            </span>
 
-            <h3>${escapeHTML(title)}</h3>
+            <h3>
+              ${escapeHTML(title)}
+            </h3>
 
-            <p>${escapeHTML(description)}</p>
+            <p>
+              ${escapeHTML(description)}
+            </p>
 
-            <b>السعر: ${escapeHTML(price)}</b>
+            <b>
+              ${priceLabel} ${escapeHTML(price)}
+            </b>
 
           </div>
 
@@ -99,7 +123,9 @@ async function loadTrips() {
     console.error(error);
 
     cards.innerHTML =
-      "<p>حدث خطأ في تحميل الرحلات.</p>";
+      isEnglish
+        ? "<p>Unable to load trips.</p>"
+        : "<p>حدث خطأ في تحميل الرحلات.</p>";
 
   }
 }

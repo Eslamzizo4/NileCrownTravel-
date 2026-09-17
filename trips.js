@@ -11,13 +11,11 @@ async function loadTrips() {
 
   if (!cards) return;
 
-  const isEnglish =
-    document.documentElement.lang === "en";
+  cards.innerHTML = "<p>جاري تحميل الرحلات...</p>";
 
-  cards.innerHTML =
-    isEnglish
-      ? "<p>Loading trips...</p>"
-      : "<p>جاري تحميل الرحلات...</p>";
+  // معرفة لغة الصفحة
+  const isEnglish =
+    document.documentElement.lang.toLowerCase().startsWith("en");
 
   try {
 
@@ -40,16 +38,19 @@ async function loadTrips() {
 
     if (!trips.length) {
 
-      cards.innerHTML =
-        isEnglish
-          ? "<p>No trips available at the moment.</p>"
-          : "<p>لا توجد رحلات حاليًا.</p>";
+      cards.innerHTML = isEnglish
+        ? "<p>No trips available at the moment.</p>"
+        : "<p>لا توجد رحلات حاليًا.</p>";
 
       return;
     }
 
 
     cards.innerHTML = trips.map(trip => {
+
+      // =========================
+      // اختيار اللغة
+      // =========================
 
       const title = isEnglish
         ? (trip.title_en || trip.title_ar || "Trip")
@@ -72,16 +73,21 @@ async function loadTrips() {
         "";
 
 
-      const priceLabel =
-        isEnglish
-          ? "Price:"
-          : "السعر:";
+      // =========================
+      // رابط صفحة التفاصيل
+      // =========================
+
+      const tripUrl =
+        "trip.html?id=" +
+        encodeURIComponent(trip.id) +
+        "&lang=" +
+        (isEnglish ? "en" : "ar");
 
 
       return `
-        <a
-          class="card"
-          href="trip.html?id=${encodeURIComponent(trip.id)}">
+
+        <a class="card"
+           href="${tripUrl}">
 
           <div
             class="pic"
@@ -92,27 +98,38 @@ async function loadTrips() {
             ">
           </div>
 
+
           <div class="card-body">
 
             <span>
               Nile Crown Travel
             </span>
 
+
             <h3>
               ${escapeHTML(title)}
             </h3>
+
 
             <p>
               ${escapeHTML(description)}
             </p>
 
+
             <b>
-              ${priceLabel} ${escapeHTML(price)}
+              ${
+                isEnglish
+                  ? "Price: "
+                  : "السعر: "
+              }
+
+              ${escapeHTML(price)}
             </b>
 
           </div>
 
         </a>
+
       `;
 
     }).join("");
@@ -122,40 +139,46 @@ async function loadTrips() {
 
     console.error(error);
 
-    cards.innerHTML =
-      isEnglish
-        ? "<p>Unable to load trips.</p>"
-        : "<p>حدث خطأ في تحميل الرحلات.</p>";
+    cards.innerHTML = isEnglish
+      ? "<p>Failed to load trips.</p>"
+      : "<p>حدث خطأ في تحميل الرحلات.</p>";
 
   }
+
 }
 
+
+// =========================
+// حماية النصوص
+// =========================
 
 function escapeHTML(value) {
 
   return String(value)
 
     .replaceAll("&", "&amp;")
-
     .replaceAll("<", "&lt;")
-
     .replaceAll(">", "&gt;")
-
     .replaceAll('"', "&quot;")
-
     .replaceAll("'", "&#039;");
+
 }
 
+
+// =========================
+// حماية رابط الصورة
+// =========================
 
 function escapeAttribute(value) {
 
   return String(value)
 
     .replaceAll("\\", "\\\\")
-
     .replaceAll("'", "\\'");
 
 }
 
+
+// تشغيل تحميل الرحلات
 
 loadTrips();

@@ -1,21 +1,589 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>لوحة إدارة Nile Crown Travel</title><link rel="stylesheet" href="style.css"><style>
-.admin{max-width:1000px;margin:auto;padding:50px 6%}.panel{background:#fff;padding:28px;border-radius:10px;box-shadow:0 8px 30px #0001;margin-bottom:22px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.panel input,.panel textarea,.panel select{width:100%;padding:12px;border:1px solid #d8cdbd;border-radius:5px;font-family:inherit}.full{grid-column:1/-1}.triprow{display:grid;grid-template-columns:1fr 150px 120px;gap:10px;align-items:center;border-bottom:1px solid #eee;padding:12px 0}.small{font-size:12px;color:#776d61}.danger{background:#7b3027;color:#fff;border:0;padding:9px 14px;border-radius:4px;cursor:pointer}.save{background:var(--gold);border:0;padding:12px 22px;border-radius:4px;font-weight:800;cursor:pointer}
-@media(max-width:650px){.grid,.triprow{grid-template-columns:1fr}.full{grid-column:auto}}
-</style></head><body><header class="nav"><a class="brand" href="index.html"><span class="crown">♛</span><span>Nile Crown<small>TRAVEL</small></span></a><a class="lang" href="index.html">الموقع</a></header>
-<main class="admin"><div class="section-head"><p class="eyebrow">ADMIN PANEL</p><h2>إدارة الرحلات والأسعار</h2><p>نسخة إدارة أولية تعمل محلياً. عند النشر سنربطها بقاعدة بيانات وتسجيل دخول آمن.</p></div>
-<div class="panel"><h3>إضافة / تعديل رحلة</h3><div class="grid"><input id="id" placeholder="معرّف الرحلة مثل luxor"><input id="title" placeholder="اسم الرحلة"><input id="category" placeholder="التصنيف"><input id="price" placeholder="السعر مثل 250 USD"><input id="image" class="full" placeholder="رابط صورة الرحلة"><textarea id="description" class="full" rows="4" placeholder="وصف الرحلة"></textarea></div><br><button class="save" onclick="saveTrip()">حفظ الرحلة</button> <button class="danger" onclick="clearForm()">مسح النموذج</button></div>
-<div class="panel"><h3>الرحلات الحالية</h3><div id="list"></div></div>
-<div class="panel"><h3>بيانات التواصل</h3><p>WhatsApp: <b>01010575983</b></p><p>Email: <b>ziade642@gmail.com</b></p><p class="small">للنشر الحقيقي: نربط اللوحة بقاعدة بيانات + تسجيل دخول آمن + تخزين صور.</p></div>
-</main><script>
-const key='nileCrownTrips';let trips=JSON.parse(localStorage.getItem(key)||'null')||[
-{id:'luxor',title:'الأقصر وأسوان',category:'Upper Egypt',price:'',image:'',description:'اكتشف معابد الأقصر وأسوان وآثار مصر القديمة.'},
-{id:'cruise',title:'رحلات نيلية',category:'Nile',price:'',image:'',description:'استمتع برحلة نيلية بين المدن التاريخية والمعابد.'},
-{id:'cairo',title:'القاهرة التاريخية',category:'History',price:'',image:'',description:'جولة بين أشهر معالم القاهرة وتجاربها الثقافية.'},
-{id:'redsea',title:'البحر الأحمر',category:'Red Sea',price:'',image:'',description:'شواطئ وطبيعة وتجارب بحرية.'}];
-function render(){document.getElementById('list').innerHTML=trips.map(t=>`<div class="triprow"><div><b>${t.title}</b><div class="small">${t.category} • ${t.price||'بدون سعر'}</div></div><button class="save" onclick="editTrip('${t.id}')">تعديل</button><button class="danger" onclick="delTrip('${t.id}')">حذف</button></div>`).join('')}
-function saveTrip(){let id=v('id'),title=v('title');if(!id||!title)return alert('اكتب المعرّف واسم الرحلة');let t={id,title,category:v('category'),price:v('price'),image:v('image'),description:v('description')};let i=trips.findIndex(x=>x.id===id);if(i>=0)trips[i]=t;else trips.push(t);localStorage.setItem(key,JSON.stringify(trips));render();clearForm();alert('تم الحفظ')}
-function editTrip(id){let t=trips.find(x=>x.id===id);['id','title','category','price','image','description'].forEach(k=>document.getElementById(k).value=t[k]||'');scrollTo(0,0)}
-function delTrip(id){if(confirm('حذف الرحلة؟')){trips=trips.filter(x=>x.id!==id);localStorage.setItem(key,JSON.stringify(trips));render()}}
-function clearForm(){['id','title','category','price','image','description'].forEach(k=>document.getElementById(k).value='')}
-function v(k){return document.getElementById(k).value.trim()}render();
-</script></body></html>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nile Crown Travel - Admin</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#f5efe3;
+  color:#17211d;
+  font-family:Arial,sans-serif
+}
+
+.nav{
+  padding:18px 6%;
+  background:#17211d;
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+
+.brand{
+  color:#fff;
+  text-decoration:none;
+  font-size:22px;
+  font-weight:bold
+}
+
+.brand small{
+  display:block;
+  font-size:10px;
+  letter-spacing:3px
+}
+
+.lang{
+  color:#fff;
+  text-decoration:none
+}
+
+.admin{
+  max-width:1000px;
+  margin:auto;
+  padding:40px 6%
+}
+
+.panel{
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 8px 30px #0001;
+  margin-bottom:22px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px
+}
+
+input,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #d8cdbd;
+  border-radius:6px;
+  font-family:inherit;
+  font-size:15px
+}
+
+.full{
+  grid-column:1/-1
+}
+
+button{
+  cursor:pointer;
+  border:0;
+  border-radius:6px;
+  padding:11px 18px;
+  font-weight:bold
+}
+
+.save{
+  background:#b89445;
+  color:#fff
+}
+
+.danger{
+  background:#7b3027;
+  color:#fff
+}
+
+.triprow{
+  display:grid;
+  grid-template-columns:1fr 150px 100px;
+  gap:10px;
+  align-items:center;
+  border-bottom:1px solid #eee;
+  padding:15px 0
+}
+
+.small{
+  font-size:13px;
+  color:#777;
+  margin-top:5px
+}
+
+.status{
+  padding:12px;
+  border-radius:6px;
+  margin-bottom:15px;
+  background:#eee
+}
+
+.loading{
+  text-align:center;
+  padding:20px
+}
+
+@media(max-width:650px){
+  .grid,.triprow{
+    grid-template-columns:1fr
+  }
+
+  .full{
+    grid-column:auto
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="nav">
+  <a class="brand" href="index.html">
+    <span>♛ Nile Crown</span>
+    <small>TRAVEL</small>
+  </a>
+  <a class="lang" href="index.html">الموقع</a>
+</header>
+
+<main class="admin">
+
+  <div class="panel">
+    <h2>إدارة الرحلات والأسعار</h2>
+    <p>من هنا تقدر تعدل سعر الرحلة وتحفظه مباشرة في قاعدة البيانات.</p>
+  </div>
+
+  <div id="status" class="status">
+    جاري الاتصال بقاعدة البيانات...
+  </div>
+
+  <div class="panel">
+
+    <h3>إضافة / تعديل رحلة</h3>
+
+    <div class="grid">
+
+      <input id="id" type="number" placeholder="رقم الرحلة">
+
+      <input id="title_ar" placeholder="اسم الرحلة بالعربي">
+
+      <input id="title_en" placeholder="اسم الرحلة بالإنجليزي">
+
+      <input id="price_ar" placeholder="السعر بالعربي - مثال: 250 دولار">
+
+      <input id="price_en" placeholder="السعر بالإنجليزي - مثال: 250 USD">
+
+      <input id="image_ar" placeholder="رابط الصورة العربي">
+
+      <input id="image_en" placeholder="رابط الصورة الإنجليزي">
+
+      <textarea id="description_ar"
+        class="full"
+        rows="4"
+        placeholder="الوصف بالعربي"></textarea>
+
+      <textarea id="description_en"
+        class="full"
+        rows="4"
+        placeholder="الوصف بالإنجليزي"></textarea>
+
+    </div>
+
+    <br>
+
+    <button class="save" onclick="saveTrip()">
+      حفظ التعديلات
+    </button>
+
+    <button class="danger" onclick="clearForm()">
+      مسح
+    </button>
+
+  </div>
+
+  <div class="panel">
+
+    <h3>الرحلات الموجودة في قاعدة البيانات</h3>
+
+    <div id="list" class="loading">
+      جاري تحميل الرحلات...
+    </div>
+
+  </div>
+
+</main>
+
+<script>
+
+/* ==============================
+   SUPABASE SETTINGS
+   ============================== */
+
+const SUPABASE_URL =
+  "https://vlqzmqbshqjxycwgiuov.supabase.co";
+
+const SUPABASE_KEY =
+ sb_publishable_2kdCMej4UhbTlmEcrqIoRg_nDGXvSeL
+
+
+/* ==============================
+   SUPABASE REQUEST
+   ============================== */
+
+async function supabaseRequest(url, options = {}) {
+
+  const response = await fetch(url, {
+    ...options,
+
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY,
+      "Content-Type": "application/json",
+      "Prefer": "return=representation",
+
+      ...(options.headers || {})
+    }
+  });
+
+  const text = await response.text();
+
+  let data = null;
+
+  try {
+    data = text ? JSON.parse(text) : null;
+  } catch {
+    data = text;
+  }
+
+  if (!response.ok) {
+    throw new Error(
+      data?.message ||
+      data?.hint ||
+      data?.error_description ||
+      "حدث خطأ في Supabase"
+    );
+  }
+
+  return data;
+}
+
+
+/* ==============================
+   LOAD TRIPS
+   ============================== */
+
+async function loadTrips() {
+
+  const list = document.getElementById("list");
+  const status = document.getElementById("status");
+
+  list.innerHTML = "جاري تحميل الرحلات...";
+
+  try {
+
+    const trips = await supabaseRequest(
+      SUPABASE_URL +
+      "/rest/v1/trips?select=*&order=id.asc"
+    );
+
+    window.trips = trips || [];
+
+    renderTrips();
+
+    status.innerHTML =
+      "✅ تم الاتصال بقاعدة البيانات بنجاح";
+
+  } catch (error) {
+
+    console.error(error);
+
+    status.innerHTML =
+      "❌ خطأ: " + error.message;
+
+    list.innerHTML =
+      "لم نتمكن من تحميل الرحلات.";
+
+  }
+}
+
+
+/* ==============================
+   DISPLAY TRIPS
+   ============================== */
+
+function renderTrips() {
+
+  const list = document.getElementById("list");
+
+  if (!window.trips.length) {
+
+    list.innerHTML =
+      "لا توجد رحلات في قاعدة البيانات.";
+
+    return;
+  }
+
+  list.innerHTML = window.trips.map(trip => {
+
+    return `
+      <div class="triprow">
+
+        <div>
+
+          <b>
+            ${escapeHTML(trip.title_ar || trip.title_en || "رحلة")}
+          </b>
+
+          <div class="small">
+            ID: ${trip.id}
+          </div>
+
+          <div class="small">
+            السعر العربي:
+            ${escapeHTML(trip.price_ar || "غير محدد")}
+          </div>
+
+          <div class="small">
+            السعر الإنجليزي:
+            ${escapeHTML(trip.price_en || "غير محدد")}
+          </div>
+
+        </div>
+
+        <button
+          class="save"
+          onclick="editTrip(${trip.id})">
+          تعديل
+        </button>
+
+        <button
+          class="danger"
+          onclick="deleteTrip(${trip.id})">
+          حذف
+        </button>
+
+      </div>
+    `;
+
+  }).join("");
+}
+
+
+/* ==============================
+   EDIT TRIP
+   ============================== */
+
+function editTrip(id) {
+
+  const trip =
+    window.trips.find(t => Number(t.id) === Number(id));
+
+  if (!trip) return;
+
+  document.getElementById("id").value =
+    trip.id || "";
+
+  document.getElementById("title_ar").value =
+    trip.title_ar || "";
+
+  document.getElementById("title_en").value =
+    trip.title_en || "";
+
+  document.getElementById("price_ar").value =
+    trip.price_ar || "";
+
+  document.getElementById("price_en").value =
+    trip.price_en || "";
+
+  document.getElementById("image_ar").value =
+    trip.image_ar || "";
+
+  document.getElementById("image_en").value =
+    trip.image_en || "";
+
+  document.getElementById("description_ar").value =
+    trip.description_ar || "";
+
+  document.getElementById("description_en").value =
+    trip.description_en || "";
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+/* ==============================
+   SAVE / UPDATE TRIP
+   ============================== */
+
+async function saveTrip() {
+
+  const id =
+    document.getElementById("id").value.trim();
+
+  if (!id) {
+
+    alert("اكتب رقم الرحلة");
+
+    return;
+  }
+
+  const trip = {
+
+    title_ar:
+      document.getElementById("title_ar").value.trim(),
+
+    title_en:
+      document.getElementById("title_en").value.trim(),
+
+    price_ar:
+      document.getElementById("price_ar").value.trim(),
+
+    price_en:
+      document.getElementById("price_en").value.trim(),
+
+    image_ar:
+      document.getElementById("image_ar").value.trim(),
+
+    image_en:
+      document.getElementById("image_en").value.trim(),
+
+    description_ar:
+      document.getElementById("description_ar").value.trim(),
+
+    description_en:
+      document.getElementById("description_en").value.trim()
+  };
+
+
+  const status =
+    document.getElementById("status");
+
+  status.innerHTML =
+    "⏳ جاري حفظ التعديلات...";
+
+
+  try {
+
+    await supabaseRequest(
+
+      SUPABASE_URL +
+      "/rest/v1/trips?id=eq." +
+      encodeURIComponent(id),
+
+      {
+        method:"PATCH",
+        body:JSON.stringify(trip)
+      }
+
+    );
+
+    status.innerHTML =
+      "✅ تم حفظ التعديلات في قاعدة البيانات";
+
+    alert("تم حفظ السعر والتعديلات بنجاح ✅");
+
+    await loadTrips();
+
+  } catch (error) {
+
+    console.error(error);
+
+    status.innerHTML =
+      "❌ فشل الحفظ: " + error.message;
+
+    alert(
+      "الحفظ فشل:\n\n" +
+      error.message
+    );
+
+  }
+}
+
+
+/* ==============================
+   DELETE
+   ============================== */
+
+async function deleteTrip(id) {
+
+  if (!confirm("هل أنت متأكد من حذف الرحلة؟")) {
+    return;
+  }
+
+  try {
+
+    await supabaseRequest(
+
+      SUPABASE_URL +
+      "/rest/v1/trips?id=eq." +
+      encodeURIComponent(id),
+
+      {
+        method:"DELETE"
+      }
+
+    );
+
+    alert("تم حذف الرحلة");
+
+    await loadTrips();
+
+  } catch (error) {
+
+    alert(
+      "فشل الحذف:\n\n" +
+      error.message
+    );
+
+  }
+}
+
+
+/* ==============================
+   CLEAR
+   ============================== */
+
+function clearForm() {
+
+  [
+    "id",
+    "title_ar",
+    "title_en",
+    "price_ar",
+    "price_en",
+    "image_ar",
+    "image_en",
+    "description_ar",
+    "description_en"
+
+  ].forEach(id => {
+
+    document.getElementById(id).value = "";
+
+  });
+}
+
+
+/* ==============================
+   SECURITY / DISPLAY
+   ============================== */
+
+function escapeHTML(value) {
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+/* ==============================
+   START
+   ============================== */
+
+loadTrips();
+
+</script>
+
+</body>
+</html>

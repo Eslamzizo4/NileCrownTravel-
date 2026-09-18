@@ -1,257 +1,277 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
+const SUPABASE_URL =
+  "https://vlqzmqbshqxjycwgiuov.supabase.co";
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Nile Crown Travel | الرحلات</title>
-
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<header class="nav">
-
-  <a id="brandLink" class="brand" href="index.html">
-    <span class="crown">♛</span>
-
-    <span>
-      Nile Crown
-      <small>TRAVEL</small>
-    </span>
-  </a>
-
-  <nav>
-
-    <a id="navHome" href="index.html">
-      الرئيسية
-    </a>
-
-    <a id="navTrips" href="trips.html">
-      الرحلات
-    </a>
-
-    <a id="navAbout" href="index.html#about">
-      عن الشركة
-    </a>
-
-    <a id="navContact" href="index.html#contact">
-      تواصل
-    </a>
-
-  </nav>
-
-  <a id="langButton" class="lang" href="#">
-    EN
-  </a>
-
-</header>
+const SUPABASE_KEY =
+  "sb_publishable_2kdCMej4UhbTlmEcrqIoRg_nDGXvSeL";
 
 
-<section class="page-head">
+async function loadTrips() {
 
-  <p id="pageEyebrow" class="eyebrow">
-    ALL EGYPT JOURNEYS
-  </p>
+  const cards = document.querySelector(".cards");
 
-  <h1 id="pageTitle">
-    كل الرحلات داخل مصر
-  </h1>
-
-  <p id="pageDescription">
-    اختار وجهتك واضغط على الرحلة لمعرفة التفاصيل وطلب الحجز.
-  </p>
-
-</section>
+  if (!cards) return;
 
 
-<section class="section">
-
-  <div class="cards">
-
-    <p id="loadingText">
-      جاري تحميل الرحلات...
-    </p>
-
-  </div>
-
-</section>
-
-
-<footer>
-
-  <b>Nile Crown Travel</b>
-
-  <span id="footerText">
-    رحلات داخل مصر
-  </span>
-
-</footer>
-
-
-<script>
-
-(function () {
+  // =========================
+  // تحديد اللغة
+  // =========================
 
   const params =
     new URLSearchParams(window.location.search);
 
-  const lang =
-    params.get("lang") === "en"
-      ? "en"
-      : "ar";
-
   const isEnglish =
-    lang === "en";
+    params.get("lang") === "en";
 
 
   // =========================
-  // لغة واتجاه الصفحة
+  // تحميل
   // =========================
 
-  document.documentElement.lang =
-    isEnglish ? "en" : "ar";
-
-  document.documentElement.dir =
-    isEnglish ? "ltr" : "rtl";
+  cards.innerHTML = isEnglish
+    ? "<p>Loading trips...</p>"
+    : "<p>جاري تحميل الرحلات...</p>";
 
 
-  // =========================
-  // العنوان
-  // =========================
+  try {
 
-  if (isEnglish) {
+    const response = await fetch(
+      SUPABASE_URL +
+      "/rest/v1/trips?select=*&order=id.asc",
+      {
+        method: "GET",
 
-    document.title =
-      "Nile Crown Travel | Trips";
-
-
-    document.getElementById("navHome").textContent =
-      "Home";
-
-    document.getElementById("navTrips").textContent =
-      "Trips";
-
-    document.getElementById("navAbout").textContent =
-      "About Us";
-
-    document.getElementById("navContact").textContent =
-      "Contact";
-
-
-    document.getElementById("pageEyebrow").textContent =
-      "ALL EGYPT JOURNEYS";
-
-    document.getElementById("pageTitle").textContent =
-      "All Trips Inside Egypt";
-
-    document.getElementById("pageDescription").textContent =
-      "Choose your destination and click on a trip to view details and request a booking.";
-
-
-    document.getElementById("footerText").textContent =
-      "Trips inside Egypt";
-
-
-    document.getElementById("langButton").textContent =
-      "AR";
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY,
+          "Content-Type": "application/json"
+        }
+      }
+    );
 
 
     // =========================
-    // الروابط الإنجليزية
+    // فحص الاتصال
     // =========================
 
-    document.getElementById("brandLink").href =
-      "en.html";
+    if (!response.ok) {
 
-    document.getElementById("navHome").href =
-      "en.html";
+      const errorText =
+        await response.text();
 
-    document.getElementById("navTrips").href =
-      "trips.html?lang=en";
-
-    document.getElementById("navAbout").href =
-      "en.html#about";
-
-    document.getElementById("navContact").href =
-      "en.html#contact";
+      throw new Error(
+        "Supabase Error: " +
+        response.status +
+        " - " +
+        errorText
+      );
+    }
 
 
-    document.getElementById("langButton").href =
-      "trips.html";
-
-
-  } else {
-
-    document.title =
-      "الرحلات | Nile Crown Travel";
-
-
-    document.getElementById("navHome").textContent =
-      "الرئيسية";
-
-    document.getElementById("navTrips").textContent =
-      "الرحلات";
-
-    document.getElementById("navAbout").textContent =
-      "عن الشركة";
-
-    document.getElementById("navContact").textContent =
-      "تواصل";
-
-
-    document.getElementById("pageEyebrow").textContent =
-      "ALL EGYPT JOURNEYS";
-
-    document.getElementById("pageTitle").textContent =
-      "كل الرحلات داخل مصر";
-
-    document.getElementById("pageDescription").textContent =
-      "اختار وجهتك واضغط على الرحلة لمعرفة التفاصيل وطلب الحجز.";
-
-
-    document.getElementById("footerText").textContent =
-      "رحلات داخل مصر";
-
-
-    document.getElementById("langButton").textContent =
-      "EN";
+    const trips =
+      await response.json();
 
 
     // =========================
-    // الروابط العربية
+    // مفيش رحلات
     // =========================
 
-    document.getElementById("brandLink").href =
-      "index.html";
+    if (!Array.isArray(trips) || trips.length === 0) {
 
-    document.getElementById("navHome").href =
-      "index.html";
+      cards.innerHTML = isEnglish
+        ? "<p>No trips available at the moment.</p>"
+        : "<p>لا توجد رحلات حاليًا.</p>";
 
-    document.getElementById("navTrips").href =
-      "trips.html";
-
-    document.getElementById("navAbout").href =
-      "index.html#about";
-
-    document.getElementById("navContact").href =
-      "index.html#contact";
+      return;
+    }
 
 
-    document.getElementById("langButton").href =
-      "trips.html?lang=en";
+    // =========================
+    // إنشاء الرحلات
+    // =========================
+
+    cards.innerHTML = trips.map(function (trip) {
+
+
+      // =========================
+      // العنوان
+      // =========================
+
+      const title = isEnglish
+        ? (
+            trip.title_en ||
+            trip.title_ar ||
+            "Trip"
+          )
+        : (
+            trip.title_ar ||
+            trip.title_en ||
+            "رحلة"
+          );
+
+
+      // =========================
+      // الوصف
+      // =========================
+
+      const description = isEnglish
+        ? (
+            trip.description_en ||
+            trip.description_ar ||
+            ""
+          )
+        : (
+            trip.description_ar ||
+            trip.description_en ||
+            ""
+          );
+
+
+      // =========================
+      // السعر
+      // =========================
+
+      const price = isEnglish
+        ? (
+            trip.price_en ||
+            trip.price_ar ||
+            "Price not specified"
+          )
+        : (
+            trip.price_ar ||
+            trip.price_en ||
+            "السعر غير محدد"
+          );
+
+
+      // =========================
+      // الصورة
+      // =========================
+
+      const image =
+        trip.image_en ||
+        trip.image_ar ||
+        "";
+
+
+      // =========================
+      // رابط الرحلة
+      // =========================
+
+      const tripUrl =
+        "trip.html?id=" +
+        encodeURIComponent(trip.id) +
+        "&lang=" +
+        (isEnglish ? "en" : "ar");
+
+
+      // =========================
+      // نص السعر
+      // =========================
+
+      const priceText = isEnglish
+        ? "Price:"
+        : "السعر:";
+
+
+      return `
+        <a
+          class="card"
+          href="${tripUrl}"
+        >
+
+          <div
+            class="pic"
+            style="
+              background-image:url('${escapeAttribute(image)}');
+              background-size:cover;
+              background-position:center;
+            "
+          >
+          </div>
+
+          <div class="card-body">
+
+            <span>
+              Nile Crown Travel
+            </span>
+
+            <h3>
+              ${escapeHTML(title)}
+            </h3>
+
+            <p>
+              ${escapeHTML(description)}
+            </p>
+
+            <b>
+              ${priceText}
+              ${escapeHTML(price)}
+            </b>
+
+          </div>
+
+        </a>
+      `;
+
+    }).join("");
+
+
+  } catch (error) {
+
+    console.error(
+      "TRIPS ERROR:",
+      error
+    );
+
+
+    cards.innerHTML = isEnglish
+      ? `
+        <p>
+          Failed to load trips.
+        </p>
+      `
+      : `
+        <p>
+          حدث خطأ في تحميل الرحلات.
+        </p>
+      `;
 
   }
 
-})();
-
-</script>
+}
 
 
-<!-- تحميل الرحلات من Supabase -->
-<script src="trips.js"></script>
+// =========================
+// حماية النصوص
+// =========================
 
-</body>
-</html>
+function escapeHTML(value) {
+
+  return String(value ?? "")
+
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+// =========================
+// حماية الصورة
+// =========================
+
+function escapeAttribute(value) {
+
+  return String(value ?? "")
+
+    .replaceAll("\\", "\\\\")
+    .replaceAll("'", "\\'");
+}
+
+
+// =========================
+// تشغيل
+// =========================
+
+loadTrips();

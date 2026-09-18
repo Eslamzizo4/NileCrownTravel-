@@ -36,7 +36,7 @@ body{
   color:white;
   position:sticky;
   top:0;
-  z-index:50;
+  z-index:1000;
 }
 
 .brand{
@@ -80,11 +80,35 @@ nav a{
 }
 
 /* =========================
+   MOBILE MENU BUTTON
+========================= */
+
+.menu-btn{
+  display:none;
+  width:44px;
+  height:40px;
+  border:1px solid var(--gold);
+  border-radius:8px;
+  background:transparent;
+  color:var(--gold);
+  font-size:25px;
+  cursor:pointer;
+  line-height:1;
+}
+
+/* القائمة المخفية في البداية */
+
+.mobile-menu{
+  display:none;
+}
+
+/* =========================
    HERO
 ========================= */
 
 .hero{
   min-height:78vh;
+
   background:
     linear-gradient(
       90deg,
@@ -195,264 +219,4 @@ nav a{
 
 .card-body span{
   font-size:12px;
-  color:#987a42;
-  font-weight:800;
-}
-
-.card h3{
-  margin:7px 0;
-  font-size:21px;
-}
-
-.card p{
-  font-size:14px;
-  line-height:1.8;
-  color:#665d52;
-}
-
-.card b{
-  font-size:13px;
-  color:#9a793a;
-}
-
-/* =========================
-   ABOUT
-========================= */
-
-.about{
-  background:#211910;
-  color:white;
-  padding:100px 12%;
-  text-align:center;
-}
-
-.about p{
-  max-width:800px;
-  margin:15px auto;
-  line-height:2;
-  color:#ddd;
-}
-
-/* =========================
-   CONTACT
-========================= */
-
-.contact form{
-  max-width:650px;
-  margin:auto;
-  display:grid;
-  gap:14px;
-}
-
-.contact input,
-.contact textarea{
-  padding:14px;
-  border:1px solid #d9cdbb;
-  border-radius:4px;
-  font-family:inherit;
-}
-
-.contact .btn{
-  width:100%;
-  margin:0;
-}
-
-.contact-info{
-  text-align:center;
-}
-
-/* =========================
-   TRIPS PAGE
-========================= */
-
-.page-head{
-  background:#211910;
-  color:white;
-  text-align:center;
-  padding:85px 7%;
-}
-
-.page-head h1{
-  font:700 50px 'Playfair Display';
-}
-
-/* =========================
-   TRIP DETAIL
-========================= */
-
-.trip-detail{
-  min-height:calc(100vh - 76px);
-  display:grid;
-  grid-template-columns:1.1fr 1fr;
-  gap:0;
-}
-
-.detail-pic{
-  background:center/cover;
-  min-height:620px;
-}
-
-.detail-copy{
-  padding:70px 9%;
-  align-self:center;
-}
-
-.detail-copy h1{
-  font:700 48px 'Playfair Display';
-}
-
-.detail-copy p,
-.detail-copy li{
-  line-height:2;
-}
-
-.price{
-  border-top:1px solid #d9cdbb;
-  border-bottom:1px solid #d9cdbb;
-  padding:18px 0;
-  margin:25px 0;
-  font-weight:800;
-}
-
-.price span{
-  color:#9a793a;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-  background:#0f0b07;
-  color:#ccc;
-  padding:30px 7%;
-  display:flex;
-  justify-content:space-between;
-}
-
-footer b{
-  color:var(--gold);
-}
-
-/* =========================
-   TABLET
-========================= */
-
-@media(max-width:900px){
-
-  .cards{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  nav{
-    display:none;
-  }
-
-  .trip-detail{
-    grid-template-columns:1fr;
-  }
-
-  .detail-pic{
-    min-height:360px;
-  }
-
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px){
-
-  .nav{
-    height:72px;
-    padding:0 5%;
-  }
-
-  .brand{
-    font-size:18px;
-  }
-
-  .crown{
-    font-size:28px;
-  }
-
-  .lang{
-    padding:6px 12px;
-  }
-
-  .cards{
-    grid-template-columns:1fr;
-    gap:25px;
-  }
-
-  .section{
-    padding:60px 5%;
-  }
-
-  .section-head{
-    margin-bottom:35px;
-  }
-
-  .section h2{
-    font-size:36px;
-  }
-
-  .hero{
-    min-height:80vh;
-  }
-
-  .hero-content{
-    padding:55px 7%;
-  }
-
-  .hero h1{
-    font-size:43px;
-  }
-
-  .hero p{
-    font-size:16px;
-    line-height:1.9;
-  }
-
-  .btn{
-    width:100%;
-    text-align:center;
-    margin:8px 0;
-  }
-
-  .page-head{
-    padding:65px 6%;
-  }
-
-  .page-head h1{
-    font-size:38px;
-  }
-
-  .detail-pic{
-    min-height:330px;
-  }
-
-  .detail-copy{
-    padding:40px 7%;
-  }
-
-  .detail-copy h1{
-    font-size:36px;
-  }
-
-  .about{
-    padding:70px 7%;
-  }
-
-  .about h2{
-    font-size:34px;
-  }
-
-  footer{
-    flex-direction:column;
-    gap:10px;
-    text-align:center;
-  }
-
-}
+  color:#987

@@ -2,205 +2,311 @@
 <html lang="en" dir="ltr">
 
 <head>
-
   <meta charset="utf-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <title>Nile Crown Travel | Egypt Inside</title>
 
-  <link rel="stylesheet" href="style.css">
-
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     NAVBAR
-========================= -->
-
 <header class="nav">
 
-
-  <!-- LOGO -->
-
   <a class="brand" href="en.html">
-
     <span class="crown">♛</span>
 
     <span>
-
       Nile Crown
-
       <small>TRAVEL</small>
-
     </span>
-
   </a>
 
 
-
-  <!-- DESKTOP MENU -->
-
   <nav>
-
-    <a href="en.html">
-      Home
-    </a>
-
-    <a href="trips.html?lang=en">
-      Trips
-    </a>
-
-    <a href="en.html#about">
-      About
-    </a>
-
-    <a href="en.html#contact">
-      Contact
-    </a>
-
+    <a href="en.html">Home</a>
+    <a href="trips.html?lang=en">Trips</a>
+    <a href="en.html#about">About</a>
+    <a href="en.html#contact">Contact</a>
   </nav>
 
-
-
-  <!-- MOBILE MENU BUTTON -->
 
   <button
     class="menu-btn"
     id="menuBtn"
     type="button"
     aria-label="Open menu">
-
     ☰
-
   </button>
 
 
-
-  <!-- LANGUAGE -->
-
-  <a
-    class="lang"
-    href="index.html">
-
+  <a class="lang" href="index.html">
     AR
-
   </a>
 
 
+  <div class="mobile-menu" id="mobileMenu">
 
-  <!-- MOBILE MENU -->
+    <a href="en.html">Home</a>
 
-  <div
-    class="mobile-menu"
-    id="mobileMenu">
+    <a href="trips.html?lang=en">Trips</a>
 
-    <a href="en.html">
-      Home
-    </a>
+    <a href="en.html#about">About</a>
 
-    <a href="trips.html?lang=en">
-      Trips
-    </a>
-
-    <a href="en.html#about">
-      About
-    </a>
-
-    <a href="en.html#contact">
-      Contact
-    </a>
+    <a href="en.html#contact">Contact</a>
 
   </div>
-
 
 </header>
 
 
-
-<!-- =========================
-     HERO
-========================= -->
+<!-- HERO -->
 
 <section class="hero">
 
-
   <div class="hero-content">
 
-
     <p class="eyebrow">
-
       DISCOVER EGYPT FROM WITHIN
-
     </p>
-
-
 
     <h1>
-
       Egypt...
-
-      <em>
-        A journey behind every story
-      </em>
-
+      <em>A journey behind every story</em>
     </h1>
 
-
-
     <p>
-
-      Discover ancient history,
-      the Nile and unforgettable
-      experiences through memorable
+      Discover ancient history, the Nile and
+      unforgettable experiences through memorable
       trips inside Egypt.
-
     </p>
-
-
 
     <a
       class="btn"
       href="trips.html?lang=en">
-
       Explore Trips
-
     </a>
-
-
 
     <a
       class="btn ghost"
       target="_blank"
+      rel="noopener"
       href="https://wa.me/201010575983?text=Hello%20Nile%20Crown%20Travel%2C%20I%20would%20like%20to%20book%20a%20trip">
-
       Book on WhatsApp
-
     </a>
 
-
   </div>
-
 
 </section>
 
 
-
-<!-- =========================
-     FEATURED TRIPS
-========================= -->
+<!-- FEATURED TRIPS -->
 
 <section class="section">
 
+  <div class="section-head">
+
+    <p class="eyebrow">
+      FEATURED JOURNEYS
+    </p>
+
+    <h2>
+      Featured Trips
+    </h2>
+
+    <p>
+      Explore our selected experiences across Egypt.
+    </p>
+
+  </div>
+
+
+  <div class="cards">
+
+    <p>
+      Loading trips...
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about" class="about">
+
+  <p class="eyebrow">
+    NILE CROWN TRAVEL
+  </p>
+
+  <h2>
+    Discover Egypt from within
+  </h2>
+
+  <p>
+    We make discovering Egypt easier by offering
+    memorable domestic trips covering ancient sites,
+    the Nile and beautiful Egyptian destinations.
+  </p>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact" class="section contact">
 
   <div class="section-head">
 
-
     <p class="eyebrow">
+      CONTACT
+    </p>
 
-      FEATURED JOURNEYS
+    <h2>
+      Start Your Journey
+    </h2>
+
+  </div>
+
+
+  <form onsubmit="sendForm(event)">
+
+    <input
+      id="name"
+      required
+      placeholder="Your Name">
+
+    <input
+      id="email"
+      type="email"
+      required
+      placeholder="Your Email">
+
+    <input
+      id="trip"
+      placeholder="Trip Name">
+
+    <textarea
+      id="message"
+      placeholder="Your Message">
+    </textarea>
+
+    <button
+      class="btn"
+      type="submit">
+      Send via WhatsApp
+    </button>
+
+  </form>
+
+
+  <p class="contact-info">
+    WhatsApp: 01010575983
+    &nbsp; | &nbsp;
+    Email: ziade642@gmail.com
+  </p>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <b>
+    Nile Crown Travel
+  </b>
+
+  <span>
+    Trips inside Egypt • © 2026
+  </span>
+
+</footer>
+
+
+<!-- TRIPS -->
+
+<script src="trips.js"></script>
+
+
+<!-- WHATSAPP FORM -->
+
+<script>
+
+function sendForm(event) {
+
+  event.preventDefault();
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const trip =
+    document.getElementById("trip").value.trim();
+
+  const message =
+    document.getElementById("message").value.trim();
+
+
+  const text =
+    "Hello Nile Crown Travel!" +
+    "\n\nName: " + name +
+    "\nEmail: " + email +
+    "\nTrip: " + trip +
+    "\nMessage: " + message;
+
+
+  const whatsappUrl =
+    "https://wa.me/201010575983?text=" +
+    encodeURIComponent(text);
+
+
+  window.open(
+    whatsappUrl,
+    "_blank"
+  );
+
+}
+
+</script>
+
+
+<!-- MOBILE MENU -->
+
+<script>
+
+const menuBtn =
+  document.getElementById("menuBtn");
+
+const mobileMenu =
+  document.getElementById("mobileMenu");
+
+
+menuBtn.addEventListener("click", function () {
+
+  mobileMenu.classList.toggle("open");
+
+});
+
+
+mobileMenu
+  .querySelectorAll("a")
+  .forEach(function (link) {
+
+    link.addEventListener("click", function () {
+
+      mobileMenu.classList.remove("open");
+
+    });
+
+  });
+
+</script>
+
+
+</body>
+</html>

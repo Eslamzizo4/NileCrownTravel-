@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>Nile Crown Travel | تفاصيل الرحلة</title>
+  <title>Nile Crown Travel | Trip Details</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -29,7 +29,7 @@
     <a id="navContact" href="index.html#contact">تواصل</a>
   </nav>
 
-  <a id="langButton" class="lang" href="en.html">EN</a>
+  <a id="langButton" class="lang" href="#">EN</a>
 
 </header>
 
@@ -37,7 +37,6 @@
 <section class="trip-detail">
 
   <div id="tripPic" class="detail-pic"></div>
-
 
   <div class="detail-copy">
 
@@ -86,9 +85,7 @@
       class="btn"
       target="_blank"
       href="#">
-
       طلب حجز عبر واتساب
-
     </a>
 
 
@@ -96,9 +93,7 @@
       id="back"
       class="btn ghost dark"
       href="trips.html">
-
       العودة للرحلات
-
     </a>
 
   </div>
@@ -107,6 +102,119 @@
 
 
 <script src="trip.js"></script>
+
+
+<script>
+/* =========================================
+   LANGUAGE SYSTEM
+   ========================================= */
+
+(function () {
+
+  const params = new URLSearchParams(window.location.search);
+
+  const lang = params.get("lang") === "en" ? "en" : "ar";
+
+  const id = params.get("id") || "";
+
+
+  /* Page direction */
+
+  document.documentElement.lang = lang;
+
+  document.documentElement.dir = lang === "en" ? "ltr" : "rtl";
+
+
+  /* Navigation */
+
+  const navHome = document.getElementById("navHome");
+  const navTrips = document.getElementById("navTrips");
+  const navContact = document.getElementById("navContact");
+
+  const priceLabel = document.getElementById("priceLabel");
+  const includesTitle = document.getElementById("includesTitle");
+
+  const include1 = document.getElementById("include1");
+  const include2 = document.getElementById("include2");
+  const include3 = document.getElementById("include3");
+
+  const book = document.getElementById("book");
+  const back = document.getElementById("back");
+
+  const langButton = document.getElementById("langButton");
+
+
+  /* English */
+
+  if (lang === "en") {
+
+    navHome.textContent = "Home";
+    navTrips.textContent = "Trips";
+    navContact.textContent = "Contact";
+
+    priceLabel.textContent = "Price:";
+
+    includesTitle.textContent = "What's included";
+
+    include1.textContent = "Trip organization and coordination";
+    include2.textContent = "Details according to the selected program";
+    include3.textContent = "Booking and inquiry support";
+
+    book.textContent = "Book via WhatsApp";
+    back.textContent = "Back to trips";
+
+    langButton.textContent = "AR";
+
+    langButton.href = "trip.html?id=" + encodeURIComponent(id) + "&lang=ar";
+
+
+    /* English links */
+
+    navHome.href = "en.html";
+    navTrips.href = "trips.html?lang=en";
+    navContact.href = "en.html#contact";
+
+    back.href = "trips.html?lang=en";
+
+  }
+
+
+  /* Arabic */
+
+  else {
+
+    navHome.textContent = "الرئيسية";
+    navTrips.textContent = "الرحلات";
+    navContact.textContent = "تواصل";
+
+    priceLabel.textContent = "السعر:";
+
+    includesTitle.textContent = "يشمل البرنامج";
+
+    include1.textContent = "تنظيم وتنسيق الرحلة";
+    include2.textContent = "التفاصيل حسب البرنامج المختار";
+    include3.textContent = "دعم وتواصل للحجز والاستفسار";
+
+    book.textContent = "طلب حجز عبر واتساب";
+    back.textContent = "العودة للرحلات";
+
+    langButton.textContent = "EN";
+
+    langButton.href = "trip.html?id=" + encodeURIComponent(id) + "&lang=en";
+
+
+    /* Arabic links */
+
+    navHome.href = "index.html";
+    navTrips.href = "trips.html";
+    navContact.href = "index.html#contact";
+
+    back.href = "trips.html";
+
+  }
+
+})();
+</script>
 
 </body>
 </html>

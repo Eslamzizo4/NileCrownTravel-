@@ -7,49 +7,140 @@
 
   <title>Nile Crown Travel | Trip Details</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 
 <body>
 
 <header class="nav">
 
+  <!-- LOGO -->
   <a class="brand" href="index.html">
+
     <span class="crown">♛</span>
 
     <span>
       Nile Crown
       <small>TRAVEL</small>
     </span>
+
   </a>
 
+
+  <!-- DESKTOP MENU -->
   <nav>
-    <a id="navHome" href="index.html">الرئيسية</a>
-    <a id="navTrips" href="trips.html">الرحلات</a>
-    <a id="navContact" href="index.html#contact">تواصل</a>
+
+    <a id="navHome" href="index.html">
+      الرئيسية
+    </a>
+
+    <a id="navTrips" href="trips.html">
+      الرحلات
+    </a>
+
+    <a id="navContact" href="index.html#contact">
+      تواصل
+    </a>
+
   </nav>
 
-  <a id="langButton" class="lang" href="#">EN</a>
+
+  <!-- MOBILE MENU BUTTON -->
+  <button
+    class="menu-btn"
+    id="menuBtn"
+    type="button"
+    aria-label="فتح القائمة">
+
+    ☰
+
+  </button>
+
+
+  <!-- LANGUAGE -->
+  <a
+    id="langButton"
+    class="lang"
+    href="#">
+
+    EN
+
+  </a>
+
+
+  <!-- MOBILE MENU -->
+  <div
+    class="mobile-menu"
+    id="mobileMenu">
+
+    <a
+      id="mobileHome"
+      href="index.html">
+
+      الرئيسية
+
+    </a>
+
+    <a
+      id="mobileTrips"
+      href="trips.html">
+
+      الرحلات
+
+    </a>
+
+    <a
+      id="mobileContact"
+      href="index.html#contact">
+
+      تواصل
+
+    </a>
+
+  </div>
 
 </header>
 
 
+<!-- ================= TRIP ================= -->
+
 <section class="trip-detail">
 
-  <div id="tripPic" class="detail-pic"></div>
+  <!-- IMAGE -->
+
+  <div
+    id="tripPic"
+    class="detail-pic">
+  </div>
+
+
+  <!-- DETAILS -->
 
   <div class="detail-copy">
 
-    <p id="category" class="eyebrow"></p>
+    <p
+      id="category"
+      class="eyebrow">
+    </p>
 
-    <h1 id="title"></h1>
 
-    <p id="description"></p>
+    <h1 id="title">
+      جاري تحميل الرحلة...
+    </h1>
 
+
+    <p id="description">
+      جاري تحميل تفاصيل الرحلة...
+    </p>
+
+
+    <!-- PRICE -->
 
     <div class="price">
 
-      <span id="priceLabel">السعر:</span>
+      <span id="priceLabel">
+        السعر:
+      </span>
 
       <span id="price">
         جاري تحميل السعر...
@@ -57,6 +148,8 @@
 
     </div>
 
+
+    <!-- INCLUDED -->
 
     <h3 id="includesTitle">
       يشمل البرنامج
@@ -80,20 +173,29 @@
     </ul>
 
 
+    <!-- BOOK -->
+
     <a
       id="book"
       class="btn"
       target="_blank"
+      rel="noopener"
       href="#">
+
       طلب حجز عبر واتساب
+
     </a>
 
+
+    <!-- BACK -->
 
     <a
       id="back"
       class="btn ghost dark"
       href="trips.html">
+
       العودة للرحلات
+
     </a>
 
   </div>
@@ -101,120 +203,320 @@
 </section>
 
 
+<!-- ================= TRIP JS ================= -->
+
 <script src="trip.js"></script>
 
 
+<!-- ================= LANGUAGE SYSTEM ================= -->
+
 <script>
-/* =========================================
-   LANGUAGE SYSTEM
-   ========================================= */
 
 (function () {
 
-  const params = new URLSearchParams(window.location.search);
+  const params =
+    new URLSearchParams(window.location.search);
 
-  const lang = params.get("lang") === "en" ? "en" : "ar";
+  const lang =
+    params.get("lang") === "en"
+      ? "en"
+      : "ar";
 
-  const id = params.get("id") || "";
+  const id =
+    params.get("id") || "";
 
 
-  /* Page direction */
+  /* =========================
+     PAGE LANGUAGE
+     ========================= */
 
   document.documentElement.lang = lang;
 
-  document.documentElement.dir = lang === "en" ? "ltr" : "rtl";
+  document.documentElement.dir =
+    lang === "en"
+      ? "ltr"
+      : "rtl";
 
 
-  /* Navigation */
+  /* =========================
+     ELEMENTS
+     ========================= */
 
-  const navHome = document.getElementById("navHome");
-  const navTrips = document.getElementById("navTrips");
-  const navContact = document.getElementById("navContact");
+  const navHome =
+    document.getElementById("navHome");
 
-  const priceLabel = document.getElementById("priceLabel");
-  const includesTitle = document.getElementById("includesTitle");
+  const navTrips =
+    document.getElementById("navTrips");
 
-  const include1 = document.getElementById("include1");
-  const include2 = document.getElementById("include2");
-  const include3 = document.getElementById("include3");
-
-  const book = document.getElementById("book");
-  const back = document.getElementById("back");
-
-  const langButton = document.getElementById("langButton");
+  const navContact =
+    document.getElementById("navContact");
 
 
-  /* English */
+  const mobileHome =
+    document.getElementById("mobileHome");
+
+  const mobileTrips =
+    document.getElementById("mobileTrips");
+
+  const mobileContact =
+    document.getElementById("mobileContact");
+
+
+  const priceLabel =
+    document.getElementById("priceLabel");
+
+  const includesTitle =
+    document.getElementById("includesTitle");
+
+
+  const include1 =
+    document.getElementById("include1");
+
+  const include2 =
+    document.getElementById("include2");
+
+  const include3 =
+    document.getElementById("include3");
+
+
+  const book =
+    document.getElementById("book");
+
+  const back =
+    document.getElementById("back");
+
+  const langButton =
+    document.getElementById("langButton");
+
+
+  /* =========================
+     ENGLISH
+     ========================= */
 
   if (lang === "en") {
+
+    /* Desktop */
 
     navHome.textContent = "Home";
     navTrips.textContent = "Trips";
     navContact.textContent = "Contact";
 
+
+    /* Mobile */
+
+    mobileHome.textContent = "Home";
+    mobileTrips.textContent = "Trips";
+    mobileContact.textContent = "Contact";
+
+
+    /* Content */
+
     priceLabel.textContent = "Price:";
 
-    includesTitle.textContent = "What's included";
+    includesTitle.textContent =
+      "What's included";
 
-    include1.textContent = "Trip organization and coordination";
-    include2.textContent = "Details according to the selected program";
-    include3.textContent = "Booking and inquiry support";
 
-    book.textContent = "Book via WhatsApp";
-    back.textContent = "Back to trips";
+    include1.textContent =
+      "Trip organization and coordination";
+
+    include2.textContent =
+      "Details according to the selected program";
+
+    include3.textContent =
+      "Booking and inquiry support";
+
+
+    book.textContent =
+      "Book via WhatsApp";
+
+    back.textContent =
+      "Back to trips";
+
+
+    /* Language button */
 
     langButton.textContent = "AR";
 
-    langButton.href = "trip.html?id=" + encodeURIComponent(id) + "&lang=ar";
+    langButton.href =
+      "trip.html?id=" +
+      encodeURIComponent(id) +
+      "&lang=ar";
 
 
-    /* English links */
+    /* Desktop links */
 
-    navHome.href = "en.html";
-    navTrips.href = "trips.html?lang=en";
-    navContact.href = "en.html#contact";
+    navHome.href =
+      "en.html";
 
-    back.href = "trips.html?lang=en";
+    navTrips.href =
+      "trips.html?lang=en";
+
+    navContact.href =
+      "en.html#contact";
+
+
+    /* Mobile links */
+
+    mobileHome.href =
+      "en.html";
+
+    mobileTrips.href =
+      "trips.html?lang=en";
+
+    mobileContact.href =
+      "en.html#contact";
+
+
+    /* Back */
+
+    back.href =
+      "trips.html?lang=en";
 
   }
 
 
-  /* Arabic */
+  /* =========================
+     ARABIC
+     ========================= */
 
   else {
 
-    navHome.textContent = "الرئيسية";
-    navTrips.textContent = "الرحلات";
-    navContact.textContent = "تواصل";
+    /* Desktop */
 
-    priceLabel.textContent = "السعر:";
+    navHome.textContent =
+      "الرئيسية";
 
-    includesTitle.textContent = "يشمل البرنامج";
+    navTrips.textContent =
+      "الرحلات";
 
-    include1.textContent = "تنظيم وتنسيق الرحلة";
-    include2.textContent = "التفاصيل حسب البرنامج المختار";
-    include3.textContent = "دعم وتواصل للحجز والاستفسار";
-
-    book.textContent = "طلب حجز عبر واتساب";
-    back.textContent = "العودة للرحلات";
-
-    langButton.textContent = "EN";
-
-    langButton.href = "trip.html?id=" + encodeURIComponent(id) + "&lang=en";
+    navContact.textContent =
+      "تواصل";
 
 
-    /* Arabic links */
+    /* Mobile */
 
-    navHome.href = "index.html";
-    navTrips.href = "trips.html";
-    navContact.href = "index.html#contact";
+    mobileHome.textContent =
+      "الرئيسية";
 
-    back.href = "trips.html";
+    mobileTrips.textContent =
+      "الرحلات";
+
+    mobileContact.textContent =
+      "تواصل";
+
+
+    /* Content */
+
+    priceLabel.textContent =
+      "السعر:";
+
+    includesTitle.textContent =
+      "يشمل البرنامج";
+
+
+    include1.textContent =
+      "تنظيم وتنسيق الرحلة";
+
+    include2.textContent =
+      "التفاصيل حسب البرنامج المختار";
+
+    include3.textContent =
+      "دعم وتواصل للحجز والاستفسار";
+
+
+    book.textContent =
+      "طلب حجز عبر واتساب";
+
+    back.textContent =
+      "العودة للرحلات";
+
+
+    /* Language */
+
+    langButton.textContent =
+      "EN";
+
+    langButton.href =
+      "trip.html?id=" +
+      encodeURIComponent(id) +
+      "&lang=en";
+
+
+    /* Desktop links */
+
+    navHome.href =
+      "index.html";
+
+    navTrips.href =
+      "trips.html";
+
+    navContact.href =
+      "index.html#contact";
+
+
+    /* Mobile links */
+
+    mobileHome.href =
+      "index.html";
+
+    mobileTrips.href =
+      "trips.html";
+
+    mobileContact.href =
+      "index.html#contact";
+
+
+    /* Back */
+
+    back.href =
+      "trips.html";
 
   }
 
 })();
+
 </script>
+
+
+<!-- ================= MOBILE MENU ================= -->
+
+<script>
+
+const menuBtn =
+  document.getElementById("menuBtn");
+
+const mobileMenu =
+  document.getElementById("mobileMenu");
+
+
+menuBtn.addEventListener(
+  "click",
+  function () {
+
+    mobileMenu.classList.toggle("open");
+
+  }
+);
+
+
+mobileMenu
+  .querySelectorAll("a")
+  .forEach(function (link) {
+
+    link.addEventListener(
+      "click",
+      function () {
+
+        mobileMenu.classList.remove("open");
+
+      }
+    );
+
+  });
+
+</script>
+
 
 </body>
 </html>

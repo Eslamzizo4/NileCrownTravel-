@@ -14,27 +14,86 @@
 
 <header class="nav">
 
+  <!-- LOGO -->
   <a class="brand" href="index.html">
+
     <span class="crown">♛</span>
+
     <span>
       Nile Crown
       <small>TRAVEL</small>
     </span>
+
   </a>
 
+
+  <!-- DESKTOP MENU -->
   <nav>
-    <a href="index.html">الرئيسية</a>
-    <a href="trips.html">الرحلات</a>
-    <a href="#about">عن الشركة</a>
-    <a href="#contact">تواصل</a>
+
+    <a href="index.html">
+      الرئيسية
+    </a>
+
+    <a href="trips.html">
+      الرحلات
+    </a>
+
+    <a href="#about">
+      عن الشركة
+    </a>
+
+    <a href="#contact">
+      تواصل
+    </a>
+
   </nav>
 
-  <a class="lang" href="en.html">EN</a>
+
+  <!-- MOBILE MENU BUTTON -->
+  <button
+    class="menu-btn"
+    id="menuBtn"
+    type="button"
+    aria-label="فتح القائمة">
+
+    ☰
+
+  </button>
+
+
+  <!-- LANGUAGE -->
+  <a class="lang" href="en.html">
+    EN
+  </a>
+
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+
+    <a href="index.html">
+      الرئيسية
+    </a>
+
+    <a href="trips.html">
+      الرحلات
+    </a>
+
+    <a href="#about">
+      عن الشركة
+    </a>
+
+    <a href="#contact">
+      تواصل
+    </a>
+
+  </div>
 
 </header>
 
 
-<!-- HERO -->
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
@@ -44,24 +103,30 @@
       DISCOVER EGYPT FROM WITHIN
     </p>
 
+
     <h1>
       مصر… <em>رحلة وراء كل حكاية</em>
     </h1>
+
 
     <p>
       اكتشف الحضارة والنيل والبحر في رحلات داخل مصر
       مصممة لتكون سهلة ومميزة.
     </p>
 
+
     <a class="btn" href="trips.html">
       استكشف الرحلات
     </a>
+
 
     <a
       class="btn ghost"
       target="_blank"
       href="https://wa.me/201010575983?text=مرحباً%20Nile%20Crown%20Travel،%20أرغب%20في%20طلب%20حجز">
+
       احجز عبر واتساب
+
     </a>
 
   </div>
@@ -69,7 +134,9 @@
 </section>
 
 
-<!-- FEATURED TRIPS -->
+<!-- =========================
+     FEATURED TRIPS
+========================= -->
 
 <section class="section">
 
@@ -79,9 +146,11 @@
       FEATURED JOURNEYS
     </p>
 
+
     <h2>
       رحلات مختارة
     </h2>
+
 
     <p>
       اكتشف رحلاتنا وتجاربنا داخل مصر.
@@ -90,16 +159,22 @@
   </div>
 
 
-  <!-- الرحلات يتم تحميلها تلقائيًا من Supabase -->
+  <!-- الرحلات من Supabase -->
 
   <div class="cards">
-    <p>جاري تحميل الرحلات...</p>
+
+    <p>
+      جاري تحميل الرحلات...
+    </p>
+
   </div>
 
 </section>
 
 
-<!-- ABOUT -->
+<!-- =========================
+     ABOUT
+========================= -->
 
 <section id="about" class="about">
 
@@ -107,9 +182,11 @@
     NILE CROWN TRAVEL
   </p>
 
+
   <h2>
     متخصصون في الرحلات داخل مصر
   </h2>
+
 
   <p>
     هدفنا أن نجعل اكتشاف مصر أسهل للزائر،
@@ -119,7 +196,9 @@
 </section>
 
 
-<!-- CONTACT -->
+<!-- =========================
+     CONTACT
+========================= -->
 
 <section id="contact" class="section contact">
 
@@ -128,6 +207,7 @@
     <p class="eyebrow">
       CONTACT
     </p>
+
 
     <h2>
       ابدأ رحلتك
@@ -143,21 +223,25 @@
       required
       placeholder="الاسم">
 
+
     <input
       id="email"
       type="email"
       required
       placeholder="البريد الإلكتروني">
 
+
     <input
       id="trip"
       placeholder="الرحلة">
+
 
     <textarea
       id="message"
       placeholder="رسالتك"></textarea>
 
-    <button class="btn">
+
+    <button class="btn" type="submit">
       إرسال عبر واتساب
     </button>
 
@@ -165,21 +249,28 @@
 
 
   <p class="contact-info">
+
     WhatsApp: 01010575983
+
     &nbsp; | &nbsp;
+
     Email: ziade642@gmail.com
+
   </p>
 
 </section>
 
 
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
   <b>
     Nile Crown Travel
   </b>
+
 
   <span>
     رحلات داخل مصر • © 2026
@@ -188,9 +279,53 @@
 </footer>
 
 
-<!-- مهم: ملف الرحلات الصحيح -->
+<!-- =========================
+     SUPABASE TRIPS
+========================= -->
 
 <script src="trips.js"></script>
+
+
+<!-- =========================
+     MOBILE MENU
+========================= -->
+
+<script>
+
+  const menuBtn =
+    document.getElementById("menuBtn");
+
+  const mobileMenu =
+    document.getElementById("mobileMenu");
+
+
+  menuBtn.addEventListener(
+    "click",
+    function(){
+
+      mobileMenu.classList.toggle("open");
+
+    }
+  );
+
+
+  mobileMenu
+    .querySelectorAll("a")
+    .forEach(function(link){
+
+      link.addEventListener(
+        "click",
+        function(){
+
+          mobileMenu.classList.remove("open");
+
+        }
+      );
+
+    });
+
+</script>
+
 
 </body>
 </html>

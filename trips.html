@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>الرحلات | Nile Crown Travel</title>
+  <title>Nile Crown Travel | الرحلات</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -14,8 +14,9 @@
 
 <header class="nav">
 
-  <a class="brand" href="index.html">
+  <a id="brandLink" class="brand" href="index.html">
     <span class="crown">♛</span>
+
     <span>
       Nile Crown
       <small>TRAVEL</small>
@@ -23,24 +24,43 @@
   </a>
 
   <nav>
-    <a href="index.html">الرئيسية</a>
-    <a href="trips.html">الرحلات</a>
-    <a href="index.html#about">عن الشركة</a>
-    <a href="index.html#contact">تواصل</a>
+
+    <a id="navHome" href="index.html">
+      الرئيسية
+    </a>
+
+    <a id="navTrips" href="trips.html">
+      الرحلات
+    </a>
+
+    <a id="navAbout" href="index.html#about">
+      عن الشركة
+    </a>
+
+    <a id="navContact" href="index.html#contact">
+      تواصل
+    </a>
+
   </nav>
 
-  <a class="lang" href="en.html">EN</a>
+  <a id="langButton" class="lang" href="#">
+    EN
+  </a>
 
 </header>
 
 
 <section class="page-head">
 
-  <p class="eyebrow">ALL EGYPT JOURNEYS</p>
+  <p id="pageEyebrow" class="eyebrow">
+    ALL EGYPT JOURNEYS
+  </p>
 
-  <h1>كل الرحلات داخل مصر</h1>
+  <h1 id="pageTitle">
+    كل الرحلات داخل مصر
+  </h1>
 
-  <p>
+  <p id="pageDescription">
     اختار وجهتك واضغط على الرحلة لمعرفة التفاصيل وطلب الحجز.
   </p>
 
@@ -51,7 +71,9 @@
 
   <div class="cards">
 
-    <p>جاري تحميل الرحلات...</p>
+    <p id="loadingText">
+      جاري تحميل الرحلات...
+    </p>
 
   </div>
 
@@ -62,13 +84,106 @@
 
   <b>Nile Crown Travel</b>
 
-  <span>رحلات داخل مصر</span>
+  <span id="footerText">
+    رحلات داخل مصر
+  </span>
 
 </footer>
 
 
-<!-- تحميل الرحلات من Supabase -->
-<script src="trips.js"></script>
+<script>
 
-</body>
-</html>
+(function () {
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const lang =
+    params.get("lang") === "en"
+      ? "en"
+      : "ar";
+
+  const isEnglish =
+    lang === "en";
+
+
+  document.documentElement.lang =
+    isEnglish ? "en" : "ar";
+
+  document.documentElement.dir =
+    isEnglish ? "ltr" : "rtl";
+
+
+  if (isEnglish) {
+
+    document.title =
+      "Nile Crown Travel | Trips";
+
+
+    document.getElementById("navHome").textContent =
+      "Home";
+
+    document.getElementById("navTrips").textContent =
+      "Trips";
+
+    document.getElementById("navAbout").textContent =
+      "About Us";
+
+    document.getElementById("navContact").textContent =
+      "Contact";
+
+
+    document.getElementById("pageEyebrow").textContent =
+      "ALL EGYPT JOURNEYS";
+
+    document.getElementById("pageTitle").textContent =
+      "All Trips Inside Egypt";
+
+    document.getElementById("pageDescription").textContent =
+      "Choose your destination and click on a trip to view details and request a booking.";
+
+
+    document.getElementById("footerText").textContent =
+      "Trips inside Egypt";
+
+
+    document.getElementById("langButton").textContent =
+      "AR";
+
+
+    document.getElementById("brandLink").href =
+      "en.html";
+
+    document.getElementById("navHome").href =
+      "en.html";
+
+    document.getElementById("navTrips").href =
+      "trips.html?lang=en";
+
+    document.getElementById("navAbout").href =
+      "en.html#about";
+
+    document.getElementById("navContact").href =
+      "en.html#contact";
+
+    document.getElementById("langButton").href =
+      "trips.html";
+
+
+  } else {
+
+    document.title =
+      "الرحلات | Nile Crown Travel";
+
+
+    document.getElementById("navHome").textContent =
+      "الرئيسية";
+
+    document.getElementById("navTrips").textContent =
+      "الرحلات";
+
+    document.getElementById("navAbout").textContent =
+      "عن الشركة";
+
+    document.getElementById("navContact").textContent =
+      "تواصل

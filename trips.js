@@ -9,11 +9,13 @@ async function loadTrips() {
 
   const cards = document.querySelector(".cards");
 
-  if (!cards) return;
+  if (!cards) {
+    return;
+  }
 
 
   // =========================
-  // تحديد اللغة
+  // تحديد لغة الصفحة
   // =========================
 
   const params =
@@ -38,6 +40,10 @@ async function loadTrips() {
 
   try {
 
+    // =========================
+    // الاتصال بـ Supabase
+    // =========================
+
     const response =
       await fetch(
         SUPABASE_URL +
@@ -59,7 +65,7 @@ async function loadTrips() {
 
 
     // =========================
-    // فحص الاتصال
+    // فحص الاستجابة
     // =========================
 
     if (!response.ok) {
@@ -99,149 +105,148 @@ async function loadTrips() {
 
 
     // =========================
-    // إنشاء كروت الرحلات
+    // إنشاء الرحلات
     // =========================
 
     cards.innerHTML =
-      trips
-        .map(function (trip) {
+      trips.map(function (trip) {
 
 
-          // =========================
-          // العنوان
-          // =========================
+        // =========================
+        // العنوان
+        // =========================
 
-          const title =
-            isEnglish
-              ? (
-                  trip.title_en ||
-                  trip.title_ar ||
-                  "Trip"
-                )
-              : (
-                  trip.title_ar ||
-                  trip.title_en ||
-                  "رحلة"
-                );
-
-
-          // =========================
-          // الوصف
-          // =========================
-
-          const description =
-            isEnglish
-              ? (
-                  trip.description_en ||
-                  trip.description_ar ||
-                  ""
-                )
-              : (
-                  trip.description_ar ||
-                  trip.description_en ||
-                  ""
-                );
+        const title =
+          isEnglish
+            ? (
+                trip.title_en ||
+                trip.title_ar ||
+                "Trip"
+              )
+            : (
+                trip.title_ar ||
+                trip.title_en ||
+                "رحلة"
+              );
 
 
-          // =========================
-          // السعر
-          // =========================
+        // =========================
+        // الوصف
+        // =========================
 
-          const price =
-            isEnglish
-              ? (
-                  trip.price_en ||
-                  trip.price_ar ||
-                  "Price not specified"
-                )
-              : (
-                  trip.price_ar ||
-                  trip.price_en ||
-                  "السعر غير محدد"
-                );
-
-
-          // =========================
-          // الصورة
-          // =========================
-
-          const image =
-            trip.image_en ||
-            trip.image_ar ||
-            "";
+        const description =
+          isEnglish
+            ? (
+                trip.description_en ||
+                trip.description_ar ||
+                ""
+              )
+            : (
+                trip.description_ar ||
+                trip.description_en ||
+                ""
+              );
 
 
-          // =========================
-          // رابط الرحلة
-          // =========================
+        // =========================
+        // السعر
+        // =========================
 
-          const tripUrl =
-            "trip.html?id=" +
-            encodeURIComponent(trip.id) +
-            "&lang=" +
-            (isEnglish ? "en" : "ar");
-
-
-          // =========================
-          // كلمة السعر
-          // =========================
-
-          const priceText =
-            isEnglish
-              ? "Price:"
-              : "السعر:";
+        const price =
+          isEnglish
+            ? (
+                trip.price_en ||
+                trip.price_ar ||
+                "Price not specified"
+              )
+            : (
+                trip.price_ar ||
+                trip.price_en ||
+                "السعر غير محدد"
+              );
 
 
-          // =========================
-          // الكارت
-          // =========================
+        // =========================
+        // الصورة
+        // =========================
 
-          return `
-            <a
-              class="card"
-              href="${tripUrl}"
+        const image =
+          trip.image_en ||
+          trip.image_ar ||
+          "";
+
+
+        // =========================
+        // رابط تفاصيل الرحلة
+        // =========================
+
+        const tripUrl =
+          "trip.html?id=" +
+          encodeURIComponent(trip.id) +
+          "&lang=" +
+          (isEnglish ? "en" : "ar");
+
+
+        // =========================
+        // كلمة السعر
+        // =========================
+
+        const priceText =
+          isEnglish
+            ? "Price:"
+            : "السعر:";
+
+
+        // =========================
+        // كارت الرحلة
+        // =========================
+
+        return `
+          <a
+            class="card"
+            href="${escapeAttribute(tripUrl)}"
+          >
+
+            <div
+              class="pic"
+              style="
+                background-image:url('${escapeAttribute(image)}');
+                background-size:cover;
+                background-position:center;
+                background-repeat:no-repeat;
+              "
             >
-
-              <div
-                class="pic"
-                style="
-                  background-image:url('${escapeAttribute(image)}');
-                  background-size:cover;
-                  background-position:center;
-                "
-              >
-              </div>
+            </div>
 
 
-              <div class="card-body">
+            <div class="card-body">
 
-                <span>
-                  Nile Crown Travel
-                </span>
-
-
-                <h3>
-                  ${escapeHTML(title)}
-                </h3>
+              <span>
+                Nile Crown Travel
+              </span>
 
 
-                <p>
-                  ${escapeHTML(description)}
-                </p>
+              <h3>
+                ${escapeHTML(title)}
+              </h3>
 
 
-                <b>
-                  ${priceText}
-                  ${escapeHTML(price)}
-                </b>
+              <p>
+                ${escapeHTML(description)}
+              </p>
 
-              </div>
 
-            </a>
-          `;
+              <b>
+                ${priceText}
+                ${escapeHTML(price)}
+              </b>
 
-        })
-        .join("");
+            </div>
+
+          </a>
+        `;
+
+      }).join("");
 
 
   } catch (error) {
@@ -251,6 +256,10 @@ async function loadTrips() {
       error
     );
 
+
+    // =========================
+    // رسالة الخطأ
+    // =========================
 
     cards.innerHTML =
       isEnglish
@@ -262,3 +271,33 @@ async function loadTrips() {
 
 // =========================
 // حماية النصوص
+// =========================
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+// =========================
+// حماية الروابط والصور
+// =========================
+
+function escapeAttribute(value) {
+
+  return String(value ?? "")
+    .replaceAll("\\", "\\\\")
+    .replaceAll("'", "\\'");
+}
+
+
+// =========================
+// تشغيل الرحلات
+// =========================
+
+loadTrips();

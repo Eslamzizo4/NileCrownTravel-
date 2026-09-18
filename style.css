@@ -20,14 +20,13 @@ body{
   background:var(--cream);
   color:var(--ink);
   font-family:Cairo,Arial,sans-serif;
+  overflow-x:hidden;
 }
 
-/* =========================
-   NAVBAR
-========================= */
+/* ================= NAVBAR ================= */
 
 .nav{
-  height:76px;
+  min-height:76px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -46,6 +45,7 @@ body{
   color:white;
   text-decoration:none;
   font:20px 'Playfair Display';
+  white-space:nowrap;
 }
 
 .brand small{
@@ -53,6 +53,7 @@ body{
   font:700 9px Cairo;
   letter-spacing:3px;
   color:var(--gold);
+  text-align:center;
 }
 
 .crown{
@@ -60,15 +61,21 @@ body{
   font-size:31px;
 }
 
-nav{
+.nav nav{
   display:flex;
+  align-items:center;
   gap:28px;
 }
 
-nav a{
+.nav nav a{
   color:#eee;
   text-decoration:none;
   font-size:14px;
+  transition:.2s;
+}
+
+.nav nav a:hover{
+  color:var(--gold);
 }
 
 .lang{
@@ -77,11 +84,10 @@ nav a{
   padding:5px 13px;
   border-radius:18px;
   text-decoration:none;
+  white-space:nowrap;
 }
 
-/* =========================
-   MOBILE MENU BUTTON
-========================= */
+/* ================= MOBILE MENU ================= */
 
 .menu-btn{
   display:none;
@@ -96,28 +102,18 @@ nav a{
   line-height:1;
 }
 
-/* القائمة المخفية في البداية */
-
 .mobile-menu{
   display:none;
 }
 
-/* =========================
-   HERO
-========================= */
+/* ================= HERO ================= */
 
 .hero{
   min-height:78vh;
-
   background:
-    linear-gradient(
-      90deg,
-      rgba(15,10,5,.9),
-      rgba(15,10,5,.3)
-    ),
+    linear-gradient(90deg,rgba(15,10,5,.9),rgba(15,10,5,.3)),
     url('https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1800&q=85')
     center/cover;
-
   display:flex;
   align-items:center;
 }
@@ -150,6 +146,8 @@ nav a{
   line-height:2;
 }
 
+/* ================= BUTTONS ================= */
+
 .btn{
   display:inline-block;
   background:var(--gold);
@@ -169,9 +167,11 @@ nav a{
   color:white;
 }
 
-/* =========================
-   SECTIONS
-========================= */
+/* ================= SECTIONS ================= */
+
+.dark{
+  color:var(--ink);
+}
 
 .section{
   padding:90px 7%;
@@ -189,14 +189,13 @@ nav a{
   margin:8px 0;
 }
 
-/* =========================
-   TRIP CARDS
-========================= */
+/* ================= TRIP CARDS ================= */
 
 .cards{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:22px;
+  width:100%;
 }
 
 .card{
@@ -206,11 +205,13 @@ nav a{
   box-shadow:0 8px 30px #0001;
   text-decoration:none;
   color:var(--ink);
+  min-width:0;
+  display:block;
 }
 
 .pic{
   height:210px;
-  background:center/cover;
+  background:center/cover no-repeat;
 }
 
 .card-body{
@@ -219,4 +220,333 @@ nav a{
 
 .card-body span{
   font-size:12px;
-  color:#987
+  color:#987a42;
+  font-weight:800;
+}
+
+.card h3{
+  margin:7px 0;
+  font-size:21px;
+  line-height:1.5;
+}
+
+.card p{
+  font-size:14px;
+  line-height:1.8;
+  color:#665d52;
+}
+
+.card b{
+  font-size:13px;
+  color:#9a793a;
+}
+
+/* ================= ABOUT ================= */
+
+.about{
+  background:#211910;
+  color:white;
+  padding:100px 12%;
+  text-align:center;
+}
+
+.about p{
+  max-width:800px;
+  margin:15px auto;
+  line-height:2;
+  color:#ddd;
+}
+
+/* ================= CONTACT ================= */
+
+.contact form{
+  max-width:650px;
+  margin:auto;
+  display:grid;
+  gap:14px;
+}
+
+.contact input,
+.contact textarea{
+  padding:14px;
+  border:1px solid #d9cdbb;
+  border-radius:4px;
+  font-family:inherit;
+  width:100%;
+}
+
+.contact textarea{
+  min-height:130px;
+  resize:vertical;
+}
+
+.contact .btn{
+  width:100%;
+  margin:0;
+}
+
+.contact-info{
+  text-align:center;
+  margin-top:25px;
+}
+
+/* ================= PAGE HEAD ================= */
+
+.page-head{
+  background:#211910;
+  color:white;
+  text-align:center;
+  padding:85px 7%;
+}
+
+.page-head h1{
+  font:700 50px 'Playfair Display';
+}
+
+/* ================= TRIP DETAIL ================= */
+
+.trip-detail{
+  min-height:calc(100vh - 76px);
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:0;
+}
+
+.detail-pic{
+  background:center/cover;
+  min-height:620px;
+}
+
+.detail-copy{
+  padding:70px 9%;
+  align-self:center;
+}
+
+.detail-copy h1{
+  font:700 48px 'Playfair Display';
+}
+
+.detail-copy p,
+.detail-copy li{
+  line-height:2;
+}
+
+.price{
+  border-top:1px solid #d9cdbb;
+  border-bottom:1px solid #d9cdbb;
+  padding:18px 0;
+  margin:25px 0;
+  font-weight:800;
+}
+
+.price span{
+  color:#9a793a;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  background:#0f0b07;
+  color:#ccc;
+  padding:30px 7%;
+  display:flex;
+  justify-content:space-between;
+}
+
+footer b{
+  color:var(--gold);
+}
+
+/* ================================================= */
+/* ================= TABLET ======================= */
+/* ================================================= */
+
+@media(max-width:900px){
+
+  .nav{
+    padding:0 5%;
+  }
+
+  .nav nav{
+    display:none;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .mobile-menu{
+    position:absolute;
+    top:76px;
+    left:5%;
+    right:5%;
+    background:var(--dark);
+    border:1px solid var(--gold);
+    border-radius:0 0 12px 12px;
+    padding:10px;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+  }
+
+  .mobile-menu.open{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+
+  .mobile-menu a{
+    display:block;
+    padding:14px 16px;
+    color:#fff;
+    text-decoration:none;
+    font-size:16px;
+    border-radius:7px;
+  }
+
+  .mobile-menu a:hover{
+    background:#2a2118;
+  }
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .trip-detail{
+    grid-template-columns:1fr;
+  }
+
+  .detail-pic{
+    min-height:360px;
+  }
+}
+
+/* ================================================= */
+/* ================= PHONE ========================= */
+/* ================================================= */
+
+@media(max-width:600px){
+
+  .nav{
+    min-height:72px;
+    padding:0 15px;
+  }
+
+  .brand{
+    font-size:17px;
+  }
+
+  .brand small{
+    font-size:8px;
+    letter-spacing:2px;
+  }
+
+  .crown{
+    font-size:27px;
+  }
+
+  .lang{
+    padding:4px 11px;
+    font-size:14px;
+  }
+
+  .menu-btn{
+    width:42px;
+    height:38px;
+    font-size:23px;
+  }
+
+  .mobile-menu{
+    top:72px;
+    left:5%;
+    right:5%;
+  }
+
+  .hero{
+    min-height:75vh;
+  }
+
+  .hero-content{
+    padding:55px 7%;
+  }
+
+  .hero h1{
+    font-size:45px;
+  }
+
+  .hero p{
+    font-size:16px;
+    line-height:1.9;
+  }
+
+  .btn{
+    width:100%;
+    text-align:center;
+    margin:8px 0 0;
+  }
+
+  .section{
+    padding:65px 6%;
+  }
+
+  .section-head{
+    margin-bottom:35px;
+  }
+
+  .section h2,
+  .about h2{
+    font-size:36px;
+  }
+
+  /* مهم جداً: كارت تحت كارت على الموبايل */
+
+  .cards{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .card{
+    width:100%;
+  }
+
+  .pic{
+    height:240px;
+  }
+
+  .card-body{
+    padding:20px;
+  }
+
+  .card h3{
+    font-size:23px;
+    line-height:1.5;
+  }
+
+  .card p{
+    font-size:15px;
+  }
+
+  .about{
+    padding:75px 8%;
+  }
+
+  .page-head{
+    padding:60px 7%;
+  }
+
+  .page-head h1{
+    font-size:38px;
+  }
+
+  .detail-copy{
+    padding:45px 7%;
+  }
+
+  .detail-copy h1{
+    font-size:38px;
+  }
+
+  footer{
+    flex-direction:column;
+    gap:10px;
+    text-align:center;
+  }
+}

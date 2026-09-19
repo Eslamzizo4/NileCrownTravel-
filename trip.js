@@ -4,27 +4,46 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_2kdCMej4UhbTlmEcrqIoRg_nDGXvSeL";
 
-const WHATSAPP_NUMBER = "201010575983";
+const WHATSAPP_NUMBER =
+  "201010575983";
 
+
+// =========================
+// تحميل الرحلة
+// =========================
 
 async function loadTrip() {
 
   const params =
-    new URLSearchParams(window.location.search);
+    new URLSearchParams(
+      window.location.search
+    );
 
-  let id = params.get("id");
+
+  // =========================
+  // ID الرحلة
+  // =========================
+
+  let id =
+    params.get("id");
+
+
+  // =========================
+  // اللغة
+  // =========================
 
   const lang =
     params.get("lang") === "en"
       ? "en"
       : "ar";
 
+
   const isEnglish =
     lang === "en";
 
 
   // =========================
-  // تحويل الرابط القديم
+  // دعم الرابط القديم
   // =========================
 
   if (id === "luxor") {
@@ -86,42 +105,27 @@ async function loadTrip() {
 
 
   // =========================
-  // لغة واتجاه الصفحة
+  // لغة الصفحة
   // =========================
 
   document.documentElement.lang =
-    isEnglish ? "en" : "ar";
+    lang;
 
   document.documentElement.dir =
-    isEnglish ? "ltr" : "rtl";
+    isEnglish
+      ? "ltr"
+      : "rtl";
 
 
   // =========================
-  // لو مفيش ID
-  // =========================
-
-  if (!id) {
-
-    if (title) {
-
-      title.textContent =
-        isEnglish
-          ? "Trip not found"
-          : "الرحلة غير موجودة";
-    }
-
-    return;
-  }
-
-
-  // =========================
-  // النصوص الإنجليزية
+  // النصوص حسب اللغة
   // =========================
 
   if (isEnglish) {
 
     if (priceLabel) {
-      priceLabel.textContent = "Price:";
+      priceLabel.textContent =
+        "Price:";
     }
 
     if (includesTitle) {
@@ -150,7 +154,6 @@ async function loadTrip() {
     }
 
     if (backButton) {
-
       backButton.textContent =
         "Back to trips";
 
@@ -159,7 +162,6 @@ async function loadTrip() {
     }
 
     if (navHome) {
-
       navHome.textContent =
         "Home";
 
@@ -168,7 +170,6 @@ async function loadTrip() {
     }
 
     if (navTrips) {
-
       navTrips.textContent =
         "Trips";
 
@@ -177,7 +178,6 @@ async function loadTrip() {
     }
 
     if (navContact) {
-
       navContact.textContent =
         "Contact";
 
@@ -185,7 +185,7 @@ async function loadTrip() {
         "en.html#contact";
     }
 
-    if (langButton) {
+    if (langButton && id) {
 
       langButton.textContent =
         "AR";
@@ -196,14 +196,7 @@ async function loadTrip() {
         "&lang=ar";
     }
 
-  }
-
-
-  // =========================
-  // النصوص العربية
-  // =========================
-
-  else {
+  } else {
 
     if (priceLabel) {
       priceLabel.textContent =
@@ -236,7 +229,6 @@ async function loadTrip() {
     }
 
     if (backButton) {
-
       backButton.textContent =
         "العودة للرحلات";
 
@@ -245,7 +237,6 @@ async function loadTrip() {
     }
 
     if (navHome) {
-
       navHome.textContent =
         "الرئيسية";
 
@@ -254,7 +245,6 @@ async function loadTrip() {
     }
 
     if (navTrips) {
-
       navTrips.textContent =
         "الرحلات";
 
@@ -263,7 +253,6 @@ async function loadTrip() {
     }
 
     if (navContact) {
-
       navContact.textContent =
         "تواصل";
 
@@ -271,7 +260,7 @@ async function loadTrip() {
         "index.html#contact";
     }
 
-    if (langButton) {
+    if (langButton && id) {
 
       langButton.textContent =
         "EN";
@@ -281,6 +270,30 @@ async function loadTrip() {
         encodeURIComponent(id) +
         "&lang=en";
     }
+  }
+
+
+  // =========================
+  // التحقق من ID
+  // =========================
+
+  if (!id) {
+
+    if (title) {
+      title.textContent =
+        isEnglish
+          ? "Trip not found"
+          : "الرحلة غير موجودة";
+    }
+
+    if (description) {
+      description.textContent =
+        isEnglish
+          ? "No trip ID was provided."
+          : "لم يتم تحديد رقم الرحلة.";
+    }
+
+    return;
   }
 
 
@@ -300,10 +313,12 @@ async function loadTrip() {
           method: "GET",
 
           headers: {
-            "apikey": SUPABASE_KEY,
+            "apikey":
+              SUPABASE_KEY,
 
             "Authorization":
-              "Bearer " + SUPABASE_KEY,
+              "Bearer " +
+              SUPABASE_KEY,
 
             "Content-Type":
               "application/json"
@@ -313,7 +328,7 @@ async function loadTrip() {
 
 
     // =========================
-    // التحقق من الاتصال
+    // فحص الاتصال
     // =========================
 
     if (!response.ok) {
@@ -335,7 +350,7 @@ async function loadTrip() {
 
 
     // =========================
-    // لو الرحلة مش موجودة
+    // الرحلة غير موجودة
     // =========================
 
     if (
@@ -344,11 +359,17 @@ async function loadTrip() {
     ) {
 
       if (title) {
-
         title.textContent =
           isEnglish
             ? "Trip not found"
             : "الرحلة غير موجودة";
+      }
+
+      if (description) {
+        description.textContent =
+          isEnglish
+            ? "This trip could not be found."
+            : "لم نتمكن من العثور على هذه الرحلة.";
       }
 
       return;
@@ -360,66 +381,84 @@ async function loadTrip() {
 
 
     // =========================
-    // بيانات الرحلة حسب اللغة
+    // العنوان
     // =========================
 
     const tripTitle =
       isEnglish
         ? (
-            trip.title_en ||
-            trip.title_ar ||
+            trip.title_en ??
+            trip.title_ar ??
             "Trip"
           )
         : (
-            trip.title_ar ||
-            trip.title_en ||
+            trip.title_ar ??
+            trip.title_en ??
             "رحلة"
           );
 
 
+    // =========================
+    // الوصف
+    // =========================
+
     const tripDescription =
       isEnglish
         ? (
-            trip.description_en ||
-            trip.description_ar ||
+            trip.description_en ??
+            trip.description_ar ??
             ""
           )
         : (
-            trip.description_ar ||
-            trip.description_en ||
+            trip.description_ar ??
+            trip.description_en ??
             ""
           );
 
+
+    // =========================
+    // السعر
+    // =========================
 
     const tripPrice =
       isEnglish
         ? (
-            trip.price_en ||
-            trip.price_ar ||
+            trip.price_en ??
+            trip.price_ar ??
             "Price not specified"
           )
         : (
-            trip.price_ar ||
-            trip.price_en ||
+            trip.price_ar ??
+            trip.price_en ??
             "السعر غير محدد"
           );
 
 
+    // =========================
+    // التصنيف
+    // =========================
+
     const tripCategory =
       isEnglish
         ? (
-            trip.category_en ||
-            trip.category_ar ||
+            trip.category_en ??
+            trip.category_ar ??
             ""
           )
         : (
-            trip.category_ar ||
-            trip.category_en ||
+            trip.category_ar ??
+            trip.category_en ??
             ""
           );
 
 
+    // =========================
+    // الصورة
+    // =========================
+
     const tripImage =
+      trip.image ||
+      trip.image_url ||
       trip.image_en ||
       trip.image_ar ||
       "";
@@ -430,35 +469,31 @@ async function loadTrip() {
     // =========================
 
     if (title) {
-
       title.textContent =
         tripTitle;
     }
 
 
     if (description) {
-
       description.textContent =
         tripDescription;
     }
 
 
     if (price) {
-
       price.textContent =
         tripPrice;
     }
 
 
     if (category) {
-
       category.textContent =
         tripCategory;
     }
 
 
     // =========================
-    // عرض صورة الرحلة
+    // صورة الرحلة
     // =========================
 
     if (tripPic) {
@@ -488,7 +523,7 @@ async function loadTrip() {
 
 
     // =========================
-    // عنوان الصفحة
+    // عنوان المتصفح
     // =========================
 
     document.title =
@@ -497,7 +532,7 @@ async function loadTrip() {
 
 
     // =========================
-    // رابط واتساب
+    // WhatsApp
     // =========================
 
     if (book) {
@@ -514,7 +549,9 @@ async function loadTrip() {
         "https://wa.me/" +
         WHATSAPP_NUMBER +
         "?text=" +
-        encodeURIComponent(bookingText);
+        encodeURIComponent(
+          bookingText
+        );
     }
 
 
@@ -527,7 +564,6 @@ async function loadTrip() {
 
 
     if (title) {
-
       title.textContent =
         isEnglish
           ? "Failed to load trip"
@@ -536,7 +572,6 @@ async function loadTrip() {
 
 
     if (description) {
-
       description.textContent =
         isEnglish
           ? "Please try again later."

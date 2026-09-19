@@ -23,6 +23,7 @@
     </span>
   </a>
 
+
   <nav>
 
     <a id="navHome" href="index.html">
@@ -43,17 +44,22 @@
 
   </nav>
 
-  <a id="langButton" class="lang" href="#">
+
+  <a id="langButton" class="lang" href="trips.html?lang=en">
     EN
   </a>
 
 </header>
 
 
+<!-- =========================
+     عنوان الصفحة
+     ========================= -->
+
 <section class="page-head">
 
   <p id="pageEyebrow" class="eyebrow">
-    ALL EGYPT JOURNEYS
+    رحلات داخل مصر
   </p>
 
   <h1 id="pageTitle">
@@ -67,9 +73,13 @@
 </section>
 
 
+<!-- =========================
+     الرحلات
+     ========================= -->
+
 <section class="section">
 
-  <div class="cards">
+  <div class="cards" id="tripsContainer">
 
     <p id="loadingText">
       جاري تحميل الرحلات...
@@ -79,6 +89,10 @@
 
 </section>
 
+
+<!-- =========================
+     Footer
+     ========================= -->
 
 <footer>
 
@@ -91,6 +105,10 @@
 </footer>
 
 
+<!-- =========================
+     لغة الصفحة
+     ========================= -->
+
 <script>
 
 (function () {
@@ -98,10 +116,16 @@
   const params =
     new URLSearchParams(window.location.search);
 
+
+  // =========================
+  // تحديد اللغة
+  // =========================
+
   const lang =
     params.get("lang") === "en"
       ? "en"
       : "ar";
+
 
   const isEnglish =
     lang === "en";
@@ -128,6 +152,8 @@
       "Nile Crown Travel | Trips";
 
 
+    // Navigation
+
     document.getElementById("navHome").textContent =
       "Home";
 
@@ -141,8 +167,10 @@
       "Contact";
 
 
+    // Page Head
+
     document.getElementById("pageEyebrow").textContent =
-      "ALL EGYPT JOURNEYS";
+      "TRIPS INSIDE EGYPT";
 
     document.getElementById("pageTitle").textContent =
       "All Trips Inside Egypt";
@@ -151,16 +179,20 @@
       "Choose your destination and click on a trip to view details and request a booking.";
 
 
+    // Footer
+
     document.getElementById("footerText").textContent =
       "Trips inside Egypt";
 
+
+    // Language Button
 
     document.getElementById("langButton").textContent =
       "AR";
 
 
     // =========================
-    // الروابط الإنجليزية
+    // English Links
     // =========================
 
     document.getElementById("brandLink").href =
@@ -178,19 +210,26 @@
     document.getElementById("navContact").href =
       "en.html#contact";
 
+
+    // الرجوع للعربي
+
     document.getElementById("langButton").href =
       "trips.html";
 
+  }
 
-  } else {
 
-    // =========================
-    // اللغة العربية
-    // =========================
+  // =========================
+  // اللغة العربية
+  // =========================
+
+  else {
 
     document.title =
       "الرحلات | Nile Crown Travel";
 
+
+    // Navigation
 
     document.getElementById("navHome").textContent =
       "الرئيسية";
@@ -205,8 +244,10 @@
       "تواصل";
 
 
+    // Page Head
+
     document.getElementById("pageEyebrow").textContent =
-      "ALL EGYPT JOURNEYS";
+      "رحلات داخل مصر";
 
     document.getElementById("pageTitle").textContent =
       "كل الرحلات داخل مصر";
@@ -215,16 +256,20 @@
       "اختار وجهتك واضغط على الرحلة لمعرفة التفاصيل وطلب الحجز.";
 
 
+    // Footer
+
     document.getElementById("footerText").textContent =
       "رحلات داخل مصر";
 
+
+    // Language Button
 
     document.getElementById("langButton").textContent =
       "EN";
 
 
     // =========================
-    // الروابط العربية
+    // Arabic Links
     // =========================
 
     document.getElementById("brandLink").href =
@@ -241,6 +286,9 @@
 
     document.getElementById("navContact").href =
       "index.html#contact";
+
+
+    // الذهاب للإنجليزي
 
     document.getElementById("langButton").href =
       "trips.html?lang=en";

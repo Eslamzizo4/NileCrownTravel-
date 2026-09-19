@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
 
 :root{
   --gold:#c9a45c;
@@ -33,13 +33,13 @@ body{
 ================================================= */
 
 .nav{
-  min-height:78px;
+  min-height:76px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 5%;
   background:rgba(23,17,12,.98);
-  color:white;
+  color:#fff;
   position:sticky;
   top:0;
   z-index:1000;
@@ -49,8 +49,8 @@ body{
 .brand{
   display:flex;
   align-items:center;
-  gap:11px;
-  color:white;
+  gap:10px;
+  color:#fff;
   text-decoration:none;
   font:700 21px 'Playfair Display',serif;
   white-space:nowrap;
@@ -74,7 +74,7 @@ body{
 .nav nav{
   display:flex;
   align-items:center;
-  gap:30px;
+  gap:28px;
 }
 
 .nav nav a{
@@ -92,7 +92,7 @@ body{
   border:1px solid var(--gold);
   color:var(--gold);
   padding:8px 15px;
-  border-radius:22px;
+  border-radius:25px;
   text-decoration:none;
   white-space:nowrap;
   transition:.25s ease;
@@ -134,8 +134,8 @@ body{
   background:
     linear-gradient(
       90deg,
-      rgba(15,10,5,.78),
-      rgba(15,10,5,.22)
+      rgba(15,10,5,.72),
+      rgba(15,10,5,.20)
     ),
     url('https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1800&q=90')
     center/cover no-repeat;
@@ -148,7 +148,7 @@ body{
 .hero-content{
   width:100%;
   max-width:850px;
-  color:white;
+  color:#fff;
   padding:85px 8%;
 }
 
@@ -188,7 +188,7 @@ body{
   color:var(--dark);
   border:1px solid var(--gold);
   padding:14px 28px;
-  border-radius:6px;
+  border-radius:7px;
   text-decoration:none;
   font-weight:800;
   margin:10px 6px 0 0;
@@ -202,14 +202,14 @@ body{
 }
 
 .ghost{
-  background:rgba(0,0,0,.12);
+  background:rgba(0,0,0,.15);
   border:1px solid rgba(255,255,255,.9);
-  color:white;
+  color:#fff;
 }
 
 .ghost:hover{
   background:rgba(255,255,255,.12);
-  color:white;
+  color:#fff;
 }
 
 /* =================================================
@@ -250,11 +250,10 @@ body{
 }
 
 .card{
-  background:white;
+  background:#fff;
   border-radius:10px;
   overflow:hidden;
-  box-shadow:
-    0 10px 35px rgba(40,25,10,.10);
+  box-shadow:0 10px 35px rgba(40,25,10,.10);
   text-decoration:none;
   color:var(--ink);
   min-width:0;
@@ -265,8 +264,7 @@ body{
 
 .card:hover{
   transform:translateY(-5px);
-  box-shadow:
-    0 16px 40px rgba(40,25,10,.16);
+  box-shadow:0 16px 40px rgba(40,25,10,.16);
 }
 
 .pic{
@@ -314,28 +312,43 @@ body{
       var(--cream-2),
       #f4ead9
     );
+
   color:var(--ink);
-  padding:100px 12% 115px;
+  padding:85px 12% 125px;
   text-align:center;
   position:relative;
   overflow:hidden;
 }
 
-.about::after{
+.about::before{
   content:"";
   position:absolute;
   left:0;
   right:0;
   bottom:0;
-  height:90px;
-  opacity:.12;
+  height:105px;
 
   background:
     linear-gradient(
       to top,
-      #c9a45c,
+      rgba(201,164,92,.16),
       transparent
     );
+
+  pointer-events:none;
+}
+
+.about::after{
+  content:"NILE   ◇   EGYPT   ◇   NILE";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:20px;
+
+  color:rgba(170,134,64,.18);
+  font-family:'Playfair Display',serif;
+  font-size:26px;
+  letter-spacing:7px;
 
   pointer-events:none;
 }
@@ -349,11 +362,41 @@ body{
 
 /* =================================================
    CONTACT
-   مخفي من الصفحة الرئيسية حسب التصميم المختار
 ================================================= */
 
 .contact{
   display:none;
+}
+
+.contact form{
+  max-width:650px;
+  margin:auto;
+  display:grid;
+  gap:14px;
+}
+
+.contact input,
+.contact textarea{
+  padding:14px;
+  border:1px solid #d9cdbb;
+  border-radius:6px;
+  font-family:inherit;
+  width:100%;
+}
+
+.contact textarea{
+  min-height:130px;
+  resize:vertical;
+}
+
+.contact .btn{
+  width:100%;
+  margin:0;
+}
+
+.contact-info{
+  text-align:center;
+  margin-top:25px;
 }
 
 /* =================================================
@@ -361,12 +404,8 @@ body{
 ================================================= */
 
 .page-head{
-  background:
-    linear-gradient(
-      rgba(33,25,16,.94),
-      rgba(33,25,16,.94)
-    );
-  color:white;
+  background:#211910;
+  color:#fff;
   text-align:center;
   padding:90px 7%;
 }
@@ -381,7 +420,7 @@ body{
 ================================================= */
 
 .trip-detail{
-  min-height:calc(100vh - 78px);
+  min-height:calc(100vh - 76px);
   display:grid;
   grid-template-columns:1.1fr 1fr;
   gap:0;
@@ -462,7 +501,7 @@ footer span{
 
   .mobile-menu{
     position:absolute;
-    top:78px;
+    top:76px;
     left:5%;
     right:5%;
     background:var(--dark);
@@ -510,9 +549,17 @@ footer span{
 
 @media(max-width:600px){
 
+  body{
+    background:var(--cream);
+  }
+
+  /* =========================
+     MOBILE NAV
+  ========================= */
+
   .nav{
-    min-height:72px;
-    padding:0 22px;
+    min-height:70px;
+    padding:0 18px;
   }
 
   .brand{
@@ -525,7 +572,7 @@ footer span{
   }
 
   .crown{
-    font-size:28px;
+    font-size:27px;
   }
 
   .lang{
@@ -535,136 +582,222 @@ footer span{
   }
 
   .menu-btn{
-    width:48px;
-    height:46px;
-    font-size:25px;
+    width:46px;
+    height:44px;
+    font-size:24px;
     border-radius:10px;
   }
 
   .mobile-menu{
-    top:72px;
+    top:70px;
     left:5%;
     right:5%;
   }
 
-  /* HERO */
+  /* =========================
+     MOBILE HERO
+  ========================= */
 
   .hero{
-    min-height:78vh;
-    background-position:center;
+    min-height:76vh;
+
+    background:
+      linear-gradient(
+        rgba(15,10,5,.28),
+        rgba(15,10,5,.38)
+      ),
+      url('https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1200&q=90')
+      center/cover no-repeat;
   }
 
   .hero-content{
-    padding:65px 7%;
+    padding:65px 7% 55px;
     text-align:center;
   }
 
+  .hero .eyebrow{
+    font-size:11px;
+    letter-spacing:2.5px;
+  }
+
   .hero h1{
-    font-size:46px;
-    line-height:1.25;
+    font-size:44px;
+    line-height:1.28;
+    margin:12px 0 17px;
   }
 
   .hero p{
     font-size:16px;
     line-height:1.9;
+    margin:0 auto 20px;
   }
 
-  .btn{
+  .hero .btn{
     width:100%;
-    text-align:center;
-    margin:8px 0 0;
-    padding:15px 20px;
+    margin:7px 0 0;
   }
 
-  /* SECTIONS */
+  /* =========================
+     MOBILE SECTIONS
+  ========================= */
 
   .section{
-    padding:70px 6%;
+    padding:65px 0 60px;
   }
 
   .section-head{
-    margin-bottom:35px;
+    padding:0 6%;
+    margin-bottom:28px;
+  }
+
+  .section-head .eyebrow{
+    font-size:11px;
+    letter-spacing:2.5px;
   }
 
   .section h2,
   .about h2{
-    font-size:38px;
-    line-height:1.4;
+    font-size:37px;
+    line-height:1.35;
   }
 
-  /* CARDS */
-
-  .cards{
-    grid-template-columns:1fr;
-    gap:20px;
-  }
-
-  .card{
-    width:100%;
-  }
-
-  .pic{
-    height:240px;
-  }
-
-  .card-body{
-    padding:20px;
-    text-align:right;
-  }
-
-  html[dir="ltr"] .card-body{
-    text-align:left;
-  }
-
-  .card h3{
-    font-size:23px;
-  }
-
-  .card p{
+  .section-head p:last-child{
     font-size:15px;
   }
 
-  /* ABOUT */
+  /* =========================
+     MOBILE TRIP CARDS
+     أفقي قابل للسحب
+  ========================= */
+
+  .cards{
+    display:flex;
+    gap:15px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding:0 6% 18px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .cards::-webkit-scrollbar{
+    height:5px;
+  }
+
+  .cards::-webkit-scrollbar-thumb{
+    background:var(--gold);
+    border-radius:20px;
+  }
+
+  .card{
+    flex:0 0 82%;
+    width:82%;
+    scroll-snap-align:center;
+    transform:none !important;
+  }
+
+  .pic{
+    height:215px;
+  }
+
+  .card-body{
+    padding:18px 18px 21px;
+  }
+
+  .card-body span{
+    font-size:10px;
+  }
+
+  .card h3{
+    font-size:22px;
+  }
+
+  .card p{
+    font-size:14px;
+    line-height:1.8;
+  }
+
+  .card b{
+    font-size:15px;
+  }
+
+  /* =========================
+     MOBILE ABOUT
+  ========================= */
 
   .about{
-    padding:80px 8% 110px;
+    padding:65px 8% 105px;
+  }
+
+  .about .eyebrow{
+    font-size:11px;
+  }
+
+  .about h2{
+    font-size:34px;
+    margin:8px 0 15px;
   }
 
   .about p{
     font-size:16px;
+    line-height:1.9;
+    margin:10px auto;
   }
 
-  /* PAGE HEAD */
+  .about::after{
+    content:"NILE  •  EGYPT  •  NILE";
+    bottom:18px;
+    font-size:18px;
+    letter-spacing:4px;
+  }
+
+  /* =========================
+     MOBILE PAGE HEAD
+  ========================= */
 
   .page-head{
-    padding:65px 7%;
+    padding:62px 7%;
   }
 
   .page-head h1{
-    font-size:39px;
+    font-size:38px;
+    line-height:1.35;
   }
 
-  /* TRIP DETAIL */
+  /* =========================
+     MOBILE TRIP DETAIL
+  ========================= */
+
+  .trip-detail{
+    display:block;
+  }
 
   .detail-pic{
-    min-height:330px;
+    min-height:320px;
   }
 
   .detail-copy{
-    padding:45px 7%;
+    padding:42px 7%;
   }
 
   .detail-copy h1{
-    font-size:39px;
+    font-size:38px;
   }
 
-  /* FOOTER */
+  .detail-copy .btn{
+    width:100%;
+    text-align:center;
+  }
+
+  /* =========================
+     MOBILE FOOTER
+  ========================= */
 
   footer{
     flex-direction:column;
-    gap:10px;
+    gap:8px;
     text-align:center;
-    padding:32px 7%;
+    padding:28px 7%;
   }
 
   footer b{
@@ -673,5 +806,47 @@ footer span{
 
   footer span{
     font-size:13px;
+  }
+}
+
+/* =================================================
+   VERY SMALL PHONES
+================================================= */
+
+@media(max-width:380px){
+
+  .nav{
+    padding:0 13px;
+  }
+
+  .brand{
+    font-size:16px;
+  }
+
+  .crown{
+    font-size:24px;
+  }
+
+  .lang{
+    padding:7px 12px;
+  }
+
+  .menu-btn{
+    width:43px;
+    height:42px;
+  }
+
+  .hero h1{
+    font-size:39px;
+  }
+
+  .section h2,
+  .about h2{
+    font-size:32px;
+  }
+
+  .card{
+    flex-basis:86%;
+    width:86%;
   }
 }

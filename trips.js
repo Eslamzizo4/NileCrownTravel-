@@ -5,6 +5,10 @@ const SUPABASE_KEY =
   "sb_publishable_2kdCMej4UhbTlmEcrqIoRg_nDGXvSeL";
 
 
+// =========================
+// تحميل الرحلات
+// =========================
+
 async function loadTrips() {
 
   const cards = document.querySelector(".cards");
@@ -21,11 +25,13 @@ async function loadTrips() {
   const params =
     new URLSearchParams(window.location.search);
 
+  const lang =
+    params.get("lang") ||
+    document.documentElement.lang ||
+    "ar";
+
   const isEnglish =
-    params.get("lang") === "en" ||
-    document.documentElement.lang
-      .toLowerCase()
-      .startsWith("en");
+    lang.toLowerCase().startsWith("en");
 
 
   // =========================
@@ -105,7 +111,7 @@ async function loadTrips() {
 
 
     // =========================
-    // إنشاء الرحلات
+    // إنشاء كروت الرحلات
     // =========================
 
     cards.innerHTML =
@@ -155,13 +161,13 @@ async function loadTrips() {
         const price =
           isEnglish
             ? (
-                trip.price_en ||
-                trip.price_ar ||
+                trip.price_en ??
+                trip.price_ar ??
                 "Price not specified"
               )
             : (
-                trip.price_ar ||
-                trip.price_en ||
+                trip.price_ar ??
+                trip.price_en ??
                 "السعر غير محدد"
               );
 
@@ -171,6 +177,8 @@ async function loadTrips() {
         // =========================
 
         const image =
+          trip.image ||
+          trip.image_url ||
           trip.image_en ||
           trip.image_ar ||
           "";
@@ -193,8 +201,8 @@ async function loadTrips() {
 
         const priceText =
           isEnglish
-            ? "Price:"
-            : "السعر:";
+            ? "Price: "
+            : "السعر: ";
 
 
         // =========================
@@ -215,8 +223,7 @@ async function loadTrips() {
                 background-position:center;
                 background-repeat:no-repeat;
               "
-            >
-            </div>
+            ></div>
 
 
             <div class="card-body">
@@ -237,67 +244,9 @@ async function loadTrips() {
 
 
               <b>
-                ${priceText}
-                ${escapeHTML(price)}
+                ${priceText}${escapeHTML(price)}
               </b>
 
             </div>
 
-          </a>
-        `;
-
-      }).join("");
-
-
-  } catch (error) {
-
-    console.error(
-      "TRIPS ERROR:",
-      error
-    );
-
-
-    // =========================
-    // رسالة الخطأ
-    // =========================
-
-    cards.innerHTML =
-      isEnglish
-        ? "<p>Failed to load trips.</p>"
-        : "<p>حدث خطأ في تحميل الرحلات.</p>";
-  }
-}
-
-
-// =========================
-// حماية النصوص
-// =========================
-
-function escapeHTML(value) {
-
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-
-// =========================
-// حماية الروابط والصور
-// =========================
-
-function escapeAttribute(value) {
-
-  return String(value ?? "")
-    .replaceAll("\\", "\\\\")
-    .replaceAll("'", "\\'");
-}
-
-
-// =========================
-// تشغيل الرحلات
-// =========================
-
-loadTrips();
+          </a

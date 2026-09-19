@@ -8,60 +8,224 @@
   <title>Nile Crown Travel | Egypt Inside</title>
 
   <link rel="stylesheet" href="style.css?v=3">
+
+  <style>
+
+    /* =========================
+       REVIEWS
+    ========================= */
+
+    .reviews{
+      background:#fbf6ed;
+    }
+
+    .reviews-grid{
+      max-width:1150px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+
+    .review-card{
+      background:#fff;
+      border:1px solid rgba(150,120,70,.15);
+      border-radius:12px;
+      padding:28px 25px;
+      box-shadow:0 10px 30px rgba(40,25,10,.08);
+      transition:.25s ease;
+    }
+
+    .review-card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 16px 38px rgba(40,25,10,.14);
+    }
+
+    .review-stars{
+      color:#c9a45c;
+      font-size:20px;
+      letter-spacing:3px;
+      margin-bottom:18px;
+    }
+
+    .review-text{
+      color:#5f5549;
+      line-height:2;
+      font-size:15px;
+      min-height:90px;
+      margin:0 0 22px;
+    }
+
+    .review-person{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      border-top:1px solid #eee4d5;
+      padding-top:17px;
+    }
+
+    .review-avatar{
+      width:43px;
+      height:43px;
+      border-radius:50%;
+      background:#211810;
+      color:#c9a45c;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      font-size:17px;
+      flex-shrink:0;
+    }
+
+    .review-person strong{
+      display:block;
+      color:#241b13;
+      font-size:15px;
+    }
+
+    .review-person span{
+      display:block;
+      color:#8a7d6c;
+      font-size:12px;
+      margin-top:2px;
+    }
+
+    .review-note{
+      text-align:center;
+      margin:25px auto 0;
+      color:#8a7d6c;
+      font-size:13px;
+    }
+
+    @media(max-width:900px){
+
+      .reviews-grid{
+        grid-template-columns:1fr;
+        padding:0 6%;
+      }
+
+    }
+
+    @media(max-width:600px){
+
+      .reviews{
+        padding:65px 0;
+      }
+
+      .review-card{
+        padding:24px 20px;
+      }
+
+      .review-text{
+        min-height:auto;
+        font-size:14px;
+      }
+
+    }
+
+  </style>
+
 </head>
 
+
 <body>
+
 
 <header class="nav">
 
   <a class="brand" href="en.html">
+
     <span class="crown">♛</span>
 
     <span>
       Nile Crown
       <small>TRAVEL</small>
     </span>
+
   </a>
 
 
+  <!-- DESKTOP MENU -->
+
   <nav>
-    <a href="en.html">Home</a>
-    <a href="trips.html?lang=en">Trips</a>
-    <a href="en.html#about">About</a>
-    <a href="en.html#contact">Contact</a>
+
+    <a href="en.html">
+      Home
+    </a>
+
+    <a href="trips.html?lang=en">
+      Trips
+    </a>
+
+    <a href="en.html#about">
+      About
+    </a>
+
+    <a href="en.html#reviews">
+      Reviews
+    </a>
+
+    <a href="en.html#contact">
+      Contact
+    </a>
+
   </nav>
 
+
+  <!-- MOBILE MENU BUTTON -->
 
   <button
     class="menu-btn"
     id="menuBtn"
     type="button"
     aria-label="Open menu">
+
     ☰
+
   </button>
 
+
+  <!-- LANGUAGE -->
 
   <a class="lang" href="index.html">
     AR
   </a>
 
 
+  <!-- MOBILE MENU -->
+
   <div class="mobile-menu" id="mobileMenu">
 
-    <a href="en.html">Home</a>
+    <a href="en.html">
+      Home
+    </a>
 
-    <a href="trips.html?lang=en">Trips</a>
+    <a href="trips.html?lang=en">
+      Trips
+    </a>
 
-    <a href="en.html#about">About</a>
+    <a href="en.html#about">
+      About
+    </a>
 
-    <a href="en.html#contact">Contact</a>
+    <a href="en.html#reviews">
+      Reviews
+    </a>
+
+    <a href="en.html#contact">
+      Contact
+    </a>
 
   </div>
 
 </header>
 
 
-<!-- HERO -->
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
@@ -71,10 +235,12 @@
       DISCOVER EGYPT FROM WITHIN
     </p>
 
+
     <h1>
       Egypt...
       <em>A journey behind every story</em>
     </h1>
+
 
     <p>
       Discover ancient history, the Nile and
@@ -82,18 +248,24 @@
       trips inside Egypt.
     </p>
 
+
     <a
       class="btn"
       href="trips.html?lang=en">
+
       Explore Trips
+
     </a>
+
 
     <a
       class="btn ghost"
       target="_blank"
       rel="noopener"
       href="https://wa.me/201010575983?text=Hello%20Nile%20Crown%20Travel%2C%20I%20would%20like%20to%20book%20a%20trip">
+
       Book on WhatsApp
+
     </a>
 
   </div>
@@ -101,7 +273,10 @@
 </section>
 
 
-<!-- FEATURED TRIPS -->
+
+<!-- =========================
+     FEATURED TRIPS
+========================= -->
 
 <section class="section">
 
@@ -111,9 +286,11 @@
       FEATURED JOURNEYS
     </p>
 
+
     <h2>
       Featured Trips
     </h2>
+
 
     <p>
       Explore our selected experiences across Egypt.
@@ -133,7 +310,10 @@
 </section>
 
 
-<!-- ABOUT -->
+
+<!-- =========================
+     ABOUT
+========================= -->
 
 <section id="about" class="about">
 
@@ -141,9 +321,11 @@
     NILE CROWN TRAVEL
   </p>
 
+
   <h2>
     Discover Egypt from within
   </h2>
+
 
   <p>
     We make discovering Egypt easier by offering
@@ -154,7 +336,170 @@
 </section>
 
 
-<!-- CONTACT -->
+
+<!-- =========================
+     REVIEWS
+========================= -->
+
+<section id="reviews" class="section reviews">
+
+  <div class="section-head">
+
+    <p class="eyebrow">
+      GUEST REVIEWS
+    </p>
+
+
+    <h2>
+      What Our Guests Say
+    </h2>
+
+
+    <p>
+      Experiences and feedback from our guests
+      after traveling with Nile Crown Travel.
+    </p>
+
+  </div>
+
+
+  <div class="reviews-grid">
+
+
+    <!-- REVIEW 1 -->
+
+    <article class="review-card">
+
+      <div class="review-stars">
+        ★★★★★
+      </div>
+
+
+      <p class="review-text">
+        A sample guest review. This section will
+        be replaced with real customer feedback
+        as we receive reviews.
+      </p>
+
+
+      <div class="review-person">
+
+        <div class="review-avatar">
+          A
+        </div>
+
+
+        <div>
+
+          <strong>
+            Sample Review
+          </strong>
+
+          <span>
+            Egypt
+          </span>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- REVIEW 2 -->
+
+    <article class="review-card">
+
+      <div class="review-stars">
+        ★★★★★
+      </div>
+
+
+      <p class="review-text">
+        A sample English review showing how our
+        guests' experiences can appear on the website.
+      </p>
+
+
+      <div class="review-person">
+
+        <div class="review-avatar">
+          S
+        </div>
+
+
+        <div>
+
+          <strong>
+            Sample Review
+          </strong>
+
+          <span>
+            United Kingdom
+          </span>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- REVIEW 3 -->
+
+    <article class="review-card">
+
+      <div class="review-stars">
+        ★★★★★
+      </div>
+
+
+      <p class="review-text">
+        A dedicated space for a real guest experience
+        after completing a trip with Nile Crown Travel.
+      </p>
+
+
+      <div class="review-person">
+
+        <div class="review-avatar">
+          M
+        </div>
+
+
+        <div>
+
+          <strong>
+            Sample Review
+          </strong>
+
+          <span>
+            Germany
+          </span>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <p class="review-note">
+    The current reviews are samples for the design
+    and will be replaced with real customer reviews.
+  </p>
+
+</section>
+
+
+
+<!-- =========================
+     CONTACT
+========================= -->
 
 <section id="contact" class="section contact">
 
@@ -163,6 +508,7 @@
     <p class="eyebrow">
       CONTACT
     </p>
+
 
     <h2>
       Start Your Journey
@@ -178,46 +524,59 @@
       required
       placeholder="Your Name">
 
+
     <input
       id="email"
       type="email"
       required
       placeholder="Your Email">
 
+
     <input
       id="trip"
       placeholder="Trip Name">
 
+
     <textarea
       id="message"
-      placeholder="Your Message">
-    </textarea>
+      placeholder="Your Message"></textarea>
+
 
     <button
       class="btn"
       type="submit">
+
       Send via WhatsApp
+
     </button>
 
   </form>
 
 
   <p class="contact-info">
+
     WhatsApp: 01010575983
+
     &nbsp; | &nbsp;
+
     Email: ziade642@gmail.com
+
   </p>
 
 </section>
 
 
-<!-- FOOTER -->
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
   <b>
     Nile Crown Travel
   </b>
+
 
   <span>
     Trips inside Egypt • © 2026
@@ -226,12 +585,18 @@
 </footer>
 
 
-<!-- TRIPS -->
+
+<!-- =========================
+     TRIPS
+========================= -->
 
 <script src="trips.js"></script>
 
 
-<!-- WHATSAPP FORM -->
+
+<!-- =========================
+     WHATSAPP FORM
+========================= -->
 
 <script>
 
@@ -275,7 +640,10 @@ function sendForm(event) {
 </script>
 
 
-<!-- MOBILE MENU -->
+
+<!-- =========================
+     MOBILE MENU
+========================= -->
 
 <script>
 

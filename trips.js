@@ -117,7 +117,6 @@ async function loadTrips() {
     cards.innerHTML =
       trips.map(function (trip) {
 
-
         // =========================
         // العنوان
         // =========================
@@ -225,23 +224,19 @@ async function loadTrips() {
               "
             ></div>
 
-
             <div class="card-body">
 
               <span>
                 Nile Crown Travel
               </span>
 
-
               <h3>
                 ${escapeHTML(title)}
               </h3>
 
-
               <p>
                 ${escapeHTML(description)}
               </p>
-
 
               <b>
                 ${priceText}${escapeHTML(price)}
@@ -249,4 +244,61 @@ async function loadTrips() {
 
             </div>
 
-          </a
+          </a>
+        `;
+
+      }).join("");
+
+
+  } catch (error) {
+
+    console.error(
+      "TRIPS ERROR:",
+      error
+    );
+
+
+    // =========================
+    // رسالة الخطأ
+    // =========================
+
+    cards.innerHTML =
+      isEnglish
+        ? "<p>Failed to load trips.</p>"
+        : "<p>حدث خطأ في تحميل الرحلات.</p>";
+  }
+}
+
+
+// =========================
+// حماية النصوص
+// =========================
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+// =========================
+// حماية الروابط والصور
+// =========================
+
+function escapeAttribute(value) {
+
+  return String(value ?? "")
+    .replaceAll("\\", "\\\\")
+    .replaceAll("'", "\\'");
+}
+
+
+// =========================
+// تشغيل الرحلات
+// =========================
+
+loadTrips();

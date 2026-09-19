@@ -2,20 +2,32 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1">
 
   <title>Nile Crown Travel | Trip Details</title>
 
-  <link rel="stylesheet" href="style.css?v=2">
+  <link
+    rel="stylesheet"
+    href="style.css?v=2">
+
 </head>
+
 
 <body>
 
 <header class="nav">
 
   <!-- LOGO -->
-  <a class="brand" href="index.html">
+
+  <a
+    id="brandLink"
+    class="brand"
+    href="index.html">
 
     <span class="crown">♛</span>
 
@@ -28,24 +40,40 @@
 
 
   <!-- DESKTOP MENU -->
+
   <nav>
 
-    <a id="navHome" href="index.html">
+    <a
+      id="navHome"
+      href="index.html">
+
       الرئيسية
+
     </a>
 
-    <a id="navTrips" href="trips.html">
+
+    <a
+      id="navTrips"
+      href="trips.html">
+
       الرحلات
+
     </a>
 
-    <a id="navContact" href="index.html#contact">
+
+    <a
+      id="navContact"
+      href="index.html#contact">
+
       تواصل
+
     </a>
 
   </nav>
 
 
   <!-- MOBILE MENU BUTTON -->
+
   <button
     class="menu-btn"
     id="menuBtn"
@@ -58,6 +86,7 @@
 
 
   <!-- LANGUAGE -->
+
   <a
     id="langButton"
     class="lang"
@@ -69,6 +98,7 @@
 
 
   <!-- MOBILE MENU -->
+
   <div
     class="mobile-menu"
     id="mobileMenu">
@@ -81,6 +111,7 @@
 
     </a>
 
+
     <a
       id="mobileTrips"
       href="trips.html">
@@ -88,6 +119,7 @@
       الرحلات
 
     </a>
+
 
     <a
       id="mobileContact"
@@ -102,9 +134,12 @@
 </header>
 
 
-<!-- ================= TRIP ================= -->
+<!-- =========================
+     TRIP DETAILS
+     ========================= -->
 
 <section class="trip-detail">
+
 
   <!-- IMAGE -->
 
@@ -117,6 +152,7 @@
   <!-- DETAILS -->
 
   <div class="detail-copy">
+
 
     <p
       id="category"
@@ -142,6 +178,7 @@
         السعر:
       </span>
 
+
       <span id="price">
         جاري تحميل السعر...
       </span>
@@ -162,9 +199,11 @@
         تنظيم وتنسيق الرحلة
       </li>
 
+
       <li id="include2">
         التفاصيل حسب البرنامج المختار
       </li>
+
 
       <li id="include3">
         دعم وتواصل للحجز والاستفسار
@@ -203,44 +242,55 @@
 </section>
 
 
-<!-- ================= TRIP JS ================= -->
-
-<script src="trip.js"></script>
-
-
-<!-- ================= LANGUAGE SYSTEM ================= -->
+<!-- =================================================
+     LANGUAGE SYSTEM
+     مهم: لازم يشتغل قبل trip.js
+     ================================================= -->
 
 <script>
 
 (function () {
 
   const params =
-    new URLSearchParams(window.location.search);
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  // =========================
+  // تحديد اللغة
+  // =========================
 
   const lang =
     params.get("lang") === "en"
       ? "en"
       : "ar";
 
+
+  const isEnglish =
+    lang === "en";
+
+
   const id =
     params.get("id") || "";
 
 
-  /* =========================
-     PAGE LANGUAGE
-     ========================= */
+  // =========================
+  // لغة واتجاه الصفحة
+  // =========================
 
-  document.documentElement.lang = lang;
+  document.documentElement.lang =
+    lang;
 
   document.documentElement.dir =
-    lang === "en"
+    isEnglish
       ? "ltr"
       : "rtl";
 
 
-  /* =========================
-     ELEMENTS
-     ========================= */
+  // =========================
+  // العناصر
+  // =========================
 
   const navHome =
     document.getElementById("navHome");
@@ -288,30 +338,49 @@
   const langButton =
     document.getElementById("langButton");
 
-
-  /* =========================
-     ENGLISH
-     ========================= */
-
-  if (lang === "en") {
-
-    /* Desktop */
-
-    navHome.textContent = "Home";
-    navTrips.textContent = "Trips";
-    navContact.textContent = "Contact";
+  const brandLink =
+    document.getElementById("brandLink");
 
 
-    /* Mobile */
+  // =========================
+  // ENGLISH
+  // =========================
 
-    mobileHome.textContent = "Home";
-    mobileTrips.textContent = "Trips";
-    mobileContact.textContent = "Contact";
+  if (isEnglish) {
+
+    document.title =
+      "Nile Crown Travel | Trip Details";
 
 
-    /* Content */
+    // Desktop
 
-    priceLabel.textContent = "Price:";
+    navHome.textContent =
+      "Home";
+
+    navTrips.textContent =
+      "Trips";
+
+    navContact.textContent =
+      "Contact";
+
+
+    // Mobile
+
+    mobileHome.textContent =
+      "Home";
+
+    mobileTrips.textContent =
+      "Trips";
+
+    mobileContact.textContent =
+      "Contact";
+
+
+    // Content
+
+    priceLabel.textContent =
+      "Price:";
+
 
     includesTitle.textContent =
       "What's included";
@@ -320,8 +389,10 @@
     include1.textContent =
       "Trip organization and coordination";
 
+
     include2.textContent =
       "Details according to the selected program";
+
 
     include3.textContent =
       "Booking and inquiry support";
@@ -330,13 +401,16 @@
     book.textContent =
       "Book via WhatsApp";
 
+
     back.textContent =
       "Back to trips";
 
 
-    /* Language button */
+    // Language button
 
-    langButton.textContent = "AR";
+    langButton.textContent =
+      "AR";
+
 
     langButton.href =
       "trip.html?id=" +
@@ -344,31 +418,39 @@
       "&lang=ar";
 
 
-    /* Desktop links */
+    // Desktop links
+
+    brandLink.href =
+      "en.html";
+
 
     navHome.href =
       "en.html";
 
+
     navTrips.href =
       "trips.html?lang=en";
+
 
     navContact.href =
       "en.html#contact";
 
 
-    /* Mobile links */
+    // Mobile links
 
     mobileHome.href =
       "en.html";
 
+
     mobileTrips.href =
       "trips.html?lang=en";
+
 
     mobileContact.href =
       "en.html#contact";
 
 
-    /* Back */
+    // Back
 
     back.href =
       "trips.html?lang=en";
@@ -376,40 +458,49 @@
   }
 
 
-  /* =========================
-     ARABIC
-     ========================= */
+  // =========================
+  // ARABIC
+  // =========================
 
   else {
 
-    /* Desktop */
+    document.title =
+      "تفاصيل الرحلة | Nile Crown Travel";
+
+
+    // Desktop
 
     navHome.textContent =
       "الرئيسية";
 
+
     navTrips.textContent =
       "الرحلات";
+
 
     navContact.textContent =
       "تواصل";
 
 
-    /* Mobile */
+    // Mobile
 
     mobileHome.textContent =
       "الرئيسية";
 
+
     mobileTrips.textContent =
       "الرحلات";
+
 
     mobileContact.textContent =
       "تواصل";
 
 
-    /* Content */
+    // Content
 
     priceLabel.textContent =
       "السعر:";
+
 
     includesTitle.textContent =
       "يشمل البرنامج";
@@ -418,8 +509,10 @@
     include1.textContent =
       "تنظيم وتنسيق الرحلة";
 
+
     include2.textContent =
       "التفاصيل حسب البرنامج المختار";
+
 
     include3.textContent =
       "دعم وتواصل للحجز والاستفسار";
@@ -428,14 +521,16 @@
     book.textContent =
       "طلب حجز عبر واتساب";
 
+
     back.textContent =
       "العودة للرحلات";
 
 
-    /* Language */
+    // Language button
 
     langButton.textContent =
       "EN";
+
 
     langButton.href =
       "trip.html?id=" +
@@ -443,31 +538,39 @@
       "&lang=en";
 
 
-    /* Desktop links */
+    // Desktop links
+
+    brandLink.href =
+      "index.html";
+
 
     navHome.href =
       "index.html";
 
+
     navTrips.href =
       "trips.html";
+
 
     navContact.href =
       "index.html#contact";
 
 
-    /* Mobile links */
+    // Mobile links
 
     mobileHome.href =
       "index.html";
 
+
     mobileTrips.href =
       "trips.html";
+
 
     mobileContact.href =
       "index.html#contact";
 
 
-    /* Back */
+    // Back
 
     back.href =
       "trips.html";
@@ -479,12 +582,23 @@
 </script>
 
 
-<!-- ================= MOBILE MENU ================= -->
+<!-- =========================
+     TRIP JS
+     لازم يأتي بعد نظام اللغة
+     ========================= -->
+
+<script src="trip.js"></script>
+
+
+<!-- =========================
+     MOBILE MENU
+     ========================= -->
 
 <script>
 
 const menuBtn =
   document.getElementById("menuBtn");
+
 
 const mobileMenu =
   document.getElementById("mobileMenu");

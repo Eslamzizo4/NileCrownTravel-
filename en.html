@@ -12,6 +12,24 @@
   <style>
 
     /* =========================
+       LOGO
+    ========================= */
+
+    .brand{
+      display:flex;
+      align-items:center;
+      text-decoration:none;
+    }
+
+    .brand-logo{
+      width:72px;
+      height:72px;
+      object-fit:contain;
+      display:block;
+    }
+
+
+    /* =========================
        REVIEWS
     ========================= */
 
@@ -154,7 +172,10 @@
       );
     }
 
-    /* IMAGE VIEWER */
+
+    /* =========================
+       IMAGE VIEWER
+    ========================= */
 
     .gallery-viewer{
       position:fixed;
@@ -213,7 +234,13 @@
 
     }
 
+
     @media(max-width:600px){
+
+      .brand-logo{
+        width:58px;
+        height:58px;
+      }
 
       .reviews{
         padding:65px 0;
@@ -269,12 +296,10 @@
 
   <a class="brand" href="en.html">
 
-    <span class="crown">♛</span>
-
-    <span>
-      Nile Crown
-      <small>TRAVEL</small>
-    </span>
+    <img
+      src="logo.png"
+      alt="Nile Crown Travel"
+      class="brand-logo">
 
   </a>
 

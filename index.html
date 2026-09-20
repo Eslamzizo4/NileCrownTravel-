@@ -1,16 +1,12 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
 
-<head>
+<html lang="ar" dir="rtl"><head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">  <title>Nile Crown Travel | Egypt Inside</title>  <link rel="stylesheet" href="style.css?v=3">  <style>
 
-  <title>Nile Crown Travel | Egypt Inside</title>
-
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Reviews Style -->
-  <style>
+    /* =========================
+       REVIEWS
+    ========================= */
 
     .reviews{
       background:#fbf6ed;
@@ -95,10 +91,116 @@
       font-size:13px;
     }
 
+
+    /* =========================
+       GALLERY
+    ========================= */
+
+    .gallery{
+      background:#f7f0e4;
+    }
+
+    .gallery-grid{
+      max-width:1150px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .gallery-item{
+      position:relative;
+      height:260px;
+      border:0;
+      padding:0;
+      overflow:hidden;
+      border-radius:12px;
+      cursor:pointer;
+      background:#211810;
+      box-shadow:0 10px 30px rgba(40,25,10,.10);
+    }
+
+    .gallery-item img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      transition:.35s ease;
+    }
+
+    .gallery-item:hover img{
+      transform:scale(1.06);
+    }
+
+    .gallery-caption{
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      padding:35px 18px 15px;
+      color:#fff;
+      text-align:right;
+      font-weight:700;
+      background:linear-gradient(
+        transparent,
+        rgba(0,0,0,.75)
+      );
+    }
+
+    /* IMAGE VIEWER */
+
+    .gallery-viewer{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.88);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:25px;
+      z-index:5000;
+    }
+
+    .gallery-viewer.open{
+      display:flex;
+    }
+
+    .gallery-viewer img{
+      max-width:92vw;
+      max-height:88vh;
+      object-fit:contain;
+      border-radius:8px;
+      box-shadow:0 20px 60px rgba(0,0,0,.5);
+    }
+
+    .gallery-close{
+      position:absolute;
+      top:20px;
+      left:25px;
+      width:46px;
+      height:46px;
+      border:1px solid #fff;
+      border-radius:50%;
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      font-size:28px;
+      cursor:pointer;
+      line-height:1;
+    }
+
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
     @media(max-width:900px){
 
       .reviews-grid{
         grid-template-columns:1fr;
+        padding:0 6%;
+      }
+
+      .gallery-grid{
+        grid-template-columns:repeat(2,1fr);
         padding:0 6%;
       }
 
@@ -119,508 +221,650 @@
         font-size:14px;
       }
 
+      .gallery{
+        padding:65px 0;
+      }
+
+      .gallery-grid{
+        grid-template-columns:1fr;
+        padding:0 6%;
+        gap:16px;
+      }
+
+      .gallery-item{
+        height:230px;
+      }
+
+      .gallery-viewer{
+        padding:15px;
+      }
+
+      .gallery-viewer img{
+        max-width:96vw;
+        max-height:82vh;
+      }
+
     }
 
-  </style>
+  </style></head><body><header class="nav">  <!-- LOGO -->  <a class="brand" href="index.html"><span class="crown">♛</span>
 
-</head>
+<span>
+  Nile Crown
+  <small>TRAVEL</small>
+</span>
 
+  </a>  <!-- DESKTOP MENU -->  <nav><a href="index.html">
+  الرئيسية
+</a>
 
-<body>
+<a href="trips.html">
+  الرحلات
+</a>
 
+<a href="#about">
+  عن الشركة
+</a>
 
-<header class="nav">
+<a href="#gallery">
+  معرض الصور
+</a>
 
-  <!-- LOGO -->
+<a href="#reviews">
+  آراء العملاء
+</a>
 
-  <a class="brand" href="index.html">
+<a href="#contact">
+  تواصل
+</a>
 
-    <span class="crown">♛</span>
+  </nav>  <!-- MOBILE MENU BUTTON --><button
+class="menu-btn"
+id="menuBtn"
+type="button"
+aria-label="فتح القائمة">
 
-    <span>
-      Nile Crown
-      <small>TRAVEL</small>
-    </span>
+☰
 
-  </a>
-
-
-  <!-- DESKTOP MENU -->
-
-  <nav>
-
-    <a href="index.html">
-      الرئيسية
-    </a>
-
-    <a href="trips.html">
-      الرحلات
-    </a>
-
-    <a href="#about">
-      عن الشركة
-    </a>
-
-    <a href="#reviews">
-      آراء العملاء
-    </a>
-
-    <a href="#contact">
-      تواصل
-    </a>
-
-  </nav>
-
-
-  <!-- MOBILE MENU BUTTON -->
-
-  <button
-    class="menu-btn"
-    id="menuBtn"
-    type="button"
-    aria-label="فتح القائمة">
-
-    ☰
-
-  </button>
-
-
-  <!-- LANGUAGE -->
-
-  <a class="lang" href="en.html">
+  </button>  <!-- LANGUAGE -->  <a class="lang" href="en.html">
     EN
-  </a>
+  </a>  <!-- MOBILE MENU -->  <div class="mobile-menu" id="mobileMenu"><a href="index.html">
+  الرئيسية
+</a>
 
+<a href="trips.html">
+  الرحلات
+</a>
 
-  <!-- MOBILE MENU -->
+<a href="#about">
+  عن الشركة
+</a>
 
-  <div class="mobile-menu" id="mobileMenu">
+<a href="#gallery">
+  معرض الصور
+</a>
 
-    <a href="index.html">
-      الرئيسية
-    </a>
+<a href="#reviews">
+  آراء العملاء
+</a>
 
-    <a href="trips.html">
-      الرحلات
-    </a>
+<a href="#contact">
+  تواصل
+</a>
 
-    <a href="#about">
-      عن الشركة
-    </a>
-
-    <a href="#reviews">
-      آراء العملاء
-    </a>
-
-    <a href="#contact">
-      تواصل
-    </a>
-
-  </div>
-
-</header>
-
-
-
-<!-- =========================
+  </div></header><!-- =========================
      HERO
-========================= -->
-
-<section class="hero">
-
-  <div class="hero-content">
-
-    <p class="eyebrow">
-      DISCOVER EGYPT FROM WITHIN
-    </p>
+========================= --><section class="hero">  <div class="hero-content"><p class="eyebrow">
+  DISCOVER EGYPT FROM WITHIN
+</p>
 
 
-    <h1>
-      مصر… <em>رحلة وراء كل حكاية</em>
-    </h1>
+<h1>
+  مصر… <em>رحلة وراء كل حكاية</em>
+</h1>
 
 
-    <p>
-      اكتشف الحضارة والنيل والبحر في رحلات داخل مصر
-      مصممة لتكون سهلة ومميزة.
-    </p>
+<p>
+  اكتشف الحضارة والنيل والبحر في رحلات داخل مصر
+  مصممة لتكون سهلة ومميزة.
+</p>
 
 
-    <a class="btn" href="trips.html">
-      استكشف الرحلات
-    </a>
+<a class="btn" href="trips.html">
+  استكشف الرحلات
+</a>
 
 
-    <a
-      class="btn ghost"
-      target="_blank"
-      href="https://wa.me/201010575983?text=مرحباً%20Nile%20Crown%20Travel،%20أرغب%20في%20طلب%20حجز">
+<a
+  class="btn ghost"
+  target="_blank"
+  rel="noopener"
+  href="https://wa.me/201010575983?text=مرحباً%20Nile%20Crown%20Travel،%20أرغب%20في%20طلب%20حجز">
 
-      احجز عبر واتساب
+  احجز عبر واتساب
 
-    </a>
+</a>
 
-  </div>
-
-</section>
-
-
-
-<!-- =========================
+  </div></section><!-- =========================
      FEATURED TRIPS
-========================= -->
-
-<section class="section">
-
-  <div class="section-head">
-
-    <p class="eyebrow">
-      FEATURED JOURNEYS
-    </p>
+========================= --><section class="section">  <div class="section-head"><p class="eyebrow">
+  FEATURED JOURNEYS
+</p>
 
 
-    <h2>
-      رحلات مختارة
-    </h2>
+<h2>
+  رحلات مختارة
+</h2>
 
 
-    <p>
-      اكتشف رحلاتنا وتجاربنا داخل مصر.
-    </p>
+<p>
+  اكتشف رحلاتنا وتجاربنا داخل مصر.
+</p>
 
-  </div>
+  </div>  <div class="cards"><p>
+  جاري تحميل الرحلات...
+</p>
 
-
-  <!-- الرحلات من Supabase -->
-
-  <div class="cards">
-
-    <p>
-      جاري تحميل الرحلات...
-    </p>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
+  </div></section><!-- =========================
      ABOUT
-========================= -->
-
-<section id="about" class="about">
-
-  <p class="eyebrow">
+========================= --><section id="about" class="about">  <p class="eyebrow">
     NILE CROWN TRAVEL
-  </p>
-
-
-  <h2>
+  </p>  <h2>
     متخصصون في الرحلات داخل مصر
-  </h2>
-
-
-  <p>
+  </h2>  <p>
     هدفنا أن نجعل اكتشاف مصر أسهل للزائر،
     من أول استفسار وحتى تفاصيل الحجز والرحلة.
-  </p>
-
-</section>
-
-
-
-<!-- =========================
-     REVIEWS
-========================= -->
-
-<section id="reviews" class="section reviews">
-
-  <div class="section-head">
-
-    <p class="eyebrow">
-      GUEST REVIEWS
-    </p>
-
-
-    <h2>
-      آراء العملاء
-    </h2>
-
-
-    <p>
-      تجارب وتقييمات عملائنا بعد رحلاتهم مع
-      Nile Crown Travel.
-    </p>
-
-  </div>
-
-
-  <div class="reviews-grid">
-
-
-    <!-- REVIEW CARD 1 -->
-
-    <article class="review-card">
-
-      <div class="review-stars">
-        ★★★★★
-      </div>
-
-
-      <p class="review-text">
-        نموذج لتقييم عميل سيتم استبداله
-        بالتقييم الحقيقي بعد بدء استقبال
-        تقييمات العملاء.
-      </p>
-
-
-      <div class="review-person">
-
-        <div class="review-avatar">
-          A
-        </div>
-
-        <div>
-
-          <strong>
-            تقييم تجريبي
-          </strong>
-
-          <span>
-            Egypt
-          </span>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-
-    <!-- REVIEW CARD 2 -->
-
-    <article class="review-card">
-
-      <div class="review-stars">
-        ★★★★★
-      </div>
-
-
-      <p class="review-text">
-        نموذج لتقييم عميل باللغة الإنجليزية،
-        ويمكن استبداله لاحقًا بالتقييم الحقيقي
-        للضيف.
-      </p>
-
-
-      <div class="review-person">
-
-        <div class="review-avatar">
-          S
-        </div>
-
-        <div>
-
-          <strong>
-            Sample Review
-          </strong>
-
-          <span>
-            United Kingdom
-          </span>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-
-    <!-- REVIEW CARD 3 -->
-
-    <article class="review-card">
-
-      <div class="review-stars">
-        ★★★★★
-      </div>
-
-
-      <p class="review-text">
-        مساحة مخصصة لعرض تجربة أحد العملاء
-        بعد رحلته مع Nile Crown Travel.
-      </p>
-
-
-      <div class="review-person">
-
-        <div class="review-avatar">
-          M
-        </div>
-
-        <div>
-
-          <strong>
-            Sample Review
-          </strong>
-
-          <span>
-            Germany
-          </span>
-
-        </div>
-
-      </div>
-
-    </article>
-
-  </div>
-
-
-  <p class="review-note">
-    التقييمات الحالية تجريبية للتصميم وسيتم استبدالها بتقييمات العملاء الحقيقية.
-  </p>
-
-</section>
-
-
-
-<!-- =========================
-     CONTACT
-========================= -->
-
-<section id="contact" class="section contact">
-
-  <div class="section-head">
-
-    <p class="eyebrow">
-      CONTACT
-    </p>
-
-
-    <h2>
-      ابدأ رحلتك
-    </h2>
-
-  </div>
-
-
-  <form onsubmit="sendForm(event)">
-
-    <input
-      id="name"
-      required
-      placeholder="الاسم">
-
-
-    <input
-      id="email"
-      type="email"
-      required
-      placeholder="البريد الإلكتروني">
-
-
-    <input
-      id="trip"
-      placeholder="الرحلة">
-
-
-    <textarea
-      id="message"
-      placeholder="رسالتك"></textarea>
-
-
-    <button class="btn" type="submit">
-      إرسال عبر واتساب
-    </button>
-
-  </form>
-
-
-  <p class="contact-info">
-
-    WhatsApp: 01010575983
-
-    &nbsp; | &nbsp;
-
-    Email: ziade642@gmail.com
-
-  </p>
-
-</section>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-  <b>
-    Nile Crown Travel
-  </b>
-
-
-  <span>
-    رحلات داخل مصر • © 2026
+  </p></section><!-- =========================
+     GALLERY
+========================= --><section id="gallery" class="section gallery">  <div class="section-head"><p class="eyebrow">
+  EXPLORE EGYPT
+</p>
+
+<h2>
+  معرض صور مصر
+</h2>
+
+<p>
+  اكتشف مصر من خلال معالمها الشهيرة
+  ومعابدها ونهر النيل.
+</p>
+
+  </div>  <div class="gallery-grid"><!-- 1 - PYRAMIDS -->
+
+<button
+  class="gallery-item"
+  type="button"
+  data-image="https://commons.wikimedia.org/wiki/Special:Redirect/file/Pyramids%20of%20Giza%2C%20Egypt.jpg"
+  aria-label="فتح صورة الأهرامات">
+
+  <img
+    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Pyramids%20of%20Giza%2C%20Egypt.jpg"
+    alt="أهرامات الجيزة">
+
+  <span class="gallery-caption">
+    أهرامات الجيزة
   </span>
 
-</footer>
+</button>
 
 
 
-<!-- =========================
-     SUPABASE TRIPS
-========================= -->
+<!-- 2 - LUXOR -->
 
-<script src="trips.js"></script>
+<button
+  class="gallery-item"
+  type="button"
+  data-image="https://commons.wikimedia.org/wiki/Special:Redirect/file/LuxorTemple.jpg"
+  aria-label="فتح صورة معبد الأقصر">
 
+  <img
+    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/LuxorTemple.jpg"
+    alt="معبد الأقصر">
 
+  <span class="gallery-caption">
+    معبد الأقصر
+  </span>
 
-<!-- =========================
-     MOBILE MENU
-========================= -->
-
-<script>
-
-  const menuBtn =
-    document.getElementById("menuBtn");
-
-  const mobileMenu =
-    document.getElementById("mobileMenu");
+</button>
 
 
-  menuBtn.addEventListener(
-    "click",
-    function(){
 
-      mobileMenu.classList.toggle("open");
+<!-- 3 - NILE ASWAN -->
 
-    }
-  );
+<button
+  class="gallery-item"
+  type="button"
+  data-image="https://commons.wikimedia.org/wiki/Special:Redirect/file/Nile%20aswan.jpg"
+  aria-label="فتح صورة النيل في أسوان">
+
+  <img
+    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Nile%20aswan.jpg"
+    alt="نهر النيل في أسوان">
+
+  <span class="gallery-caption">
+    النيل في أسوان
+  </span>
+
+</button>
 
 
-  mobileMenu
-    .querySelectorAll("a")
-    .forEach(function(link){
 
-      link.addEventListener(
-        "click",
-        function(){
+<!-- 4 - ABU SIMBEL -->
 
-          mobileMenu.classList.remove("open");
+<button
+  class="gallery-item"
+  type="button"
+  data-image="https://commons.wikimedia.org/wiki/Special:Redirect/file/Abu%20Simbel%20Temple%20Egypt.jpg"
+  aria-label="فتح صورة معبد أبو سمبل">
 
-        }
-      );
+  <img
+    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Abu%20Simbel%20Temple%20Egypt.jpg"
+    alt="معبد أبو سمبل">
+
+  <span class="gallery-caption">
+    أبو سمبل
+  </span>
+
+</button>
+
+
+
+<!-- 5 - SPHINX -->
+
+<button
+  class="gallery-item"
+  type="button"
+  data-image="https://commons.wikimedia.org/wiki/Special:Redirect/file/GREAT%20SPHINX%20OF%20GIZA.jpg"
+  aria-label="فتح صورة أبو الهول">
+
+  <img
+    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/GREAT%20SPHINX%20OF%20GIZA.jpg"
+    alt="أبو الهول">
+
+  <span class="gallery-caption">
+    أبو الهول
+  </span>
+
+</button>
+
+
+
+<!-- 6 - KARNAK -->
+
+<button
+  class="gallery-item"
+  type="button"
+  data-image="https://commons.wikimedia.org/wiki/Special:Redirect/file/Temple%20at%20Karnak.jpg"
+  aria-label="فتح صورة معبد الكرنك">
+
+  <img
+    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Temple%20at%20Karnak.jpg"
+    alt="معبد الكرنك">
+
+  <span class="gallery-caption">
+    معبد الكرنك
+  </span>
+
+</button>
+
+  </div></section><!-- =========================
+     IMAGE VIEWER
+========================= --><div
+  class="gallery-viewer"
+  id="galleryViewer"
+  role="dialog"
+  aria-modal="true"><button
+class="gallery-close"
+id="galleryClose"
+type="button"
+aria-label="إغلاق الصورة">
+
+×
+
+  </button><img
+id="galleryViewerImage"
+src=""
+alt="">
+
+</div><!-- =========================
+     REVIEWS
+========================= --><section id="reviews" class="section reviews">  <div class="section-head"><p class="eyebrow">
+  GUEST REVIEWS
+</p>
+
+
+<h2>
+  آراء عملائنا
+</h2>
+
+
+<p>
+  تجارب وتقييمات عملائنا بعد رحلاتهم
+  مع Nile Crown Travel.
+</p>
+
+  </div>  <div class="reviews-grid"><!-- REVIEW 1 -->
+
+<article class="review-card">
+
+  <div class="review-stars">
+    ★★★★★
+  </div>
+
+
+  <p class="review-text">
+    هذا نموذج لتقييم أحد العملاء، وسيتم
+    استبداله بالتقييمات الحقيقية بعد بدء
+    استقبال آراء العملاء.
+  </p>
+
+
+  <div class="review-person">
+
+    <div class="review-avatar">
+      A
+    </div>
+
+    <div>
+
+      <strong>
+        تقييم تجريبي
+      </strong>
+
+      <span>
+        مصر
+      </span>
+
+    </div>
+
+  </div>
+
+</article>
+
+
+
+<!-- REVIEW 2 -->
+
+<article class="review-card">
+
+  <div class="review-stars">
+    ★★★★★
+  </div>
+
+
+  <p class="review-text">
+    نموذج لتقييم أحد الضيوف، ويمكن استبداله
+    لاحقًا بالتقييم الحقيقي للعميل.
+  </p>
+
+
+  <div class="review-person">
+
+    <div class="review-avatar">
+      S
+    </div>
+
+    <div>
+
+      <strong>
+        تقييم تجريبي
+      </strong>
+
+      <span>
+        المملكة المتحدة
+      </span>
+
+    </div>
+
+  </div>
+
+</article>
+
+
+
+<!-- REVIEW 3 -->
+
+<article class="review-card">
+
+  <div class="review-stars">
+    ★★★★★
+  </div>
+
+
+  <p class="review-text">
+    مساحة مخصصة لعرض تجربة أحد العملاء
+    بعد إتمام رحلته مع Nile Crown Travel.
+  </p>
+
+
+  <div class="review-person">
+
+    <div class="review-avatar">
+      M
+    </div>
+
+    <div>
+
+      <strong>
+        تقييم تجريبي
+      </strong>
+
+      <span>
+        ألمانيا
+      </span>
+
+    </div>
+
+  </div>
+
+</article>
+
+  </div>  <p class="review-note">
+    التقييمات الحالية تجريبية للتصميم وسيتم
+    استبدالها بتقييمات العملاء الحقيقية.
+  </p></section><!-- =========================
+     CONTACT
+========================= --><section id="contact" class="section contact">  <div class="section-head"><p class="eyebrow">
+  CONTACT
+</p>
+
+
+<h2>
+  ابدأ رحلتك
+</h2>
+
+  </div>  <form onsubmit="sendForm(event)"><input
+  id="name"
+  required
+  placeholder="الاسم">
+
+
+<input
+  id="email"
+  type="email"
+  required
+  placeholder="البريد الإلكتروني">
+
+
+<input
+  id="trip"
+  placeholder="اسم الرحلة">
+
+
+<textarea
+  id="message"
+  placeholder="رسالتك"></textarea>
+
+
+<button class="btn" type="submit">
+  إرسال عبر واتساب
+</button>
+
+  </form>  <p class="contact-info">WhatsApp: 01010575983
+
+&nbsp; | &nbsp;
+
+Email: ziade642@gmail.com
+
+  </p></section><!-- =========================
+     FOOTER
+========================= --><footer>  <b>
+    Nile Crown Travel
+  </b>  <span>
+    رحلات داخل مصر • © 2026
+  </span></footer><!-- =========================
+     TRIPS
+========================= --><script src="trips.js"></script><!-- =========================
+     GALLERY SCRIPT
+========================= --><script>
+
+const galleryViewer =
+  document.getElementById("galleryViewer");
+
+const galleryViewerImage =
+  document.getElementById("galleryViewerImage");
+
+const galleryClose =
+  document.getElementById("galleryClose");
+
+
+document
+  .querySelectorAll(".gallery-item")
+  .forEach(function(item){
+
+    item.addEventListener("click", function(){
+
+      const image =
+        item.getAttribute("data-image");
+
+      const alt =
+        item.querySelector("img").getAttribute("alt");
+
+      galleryViewerImage.src = image;
+      galleryViewerImage.alt = alt;
+
+      galleryViewer.classList.add("open");
 
     });
 
-</script>
+  });
 
 
-</body>
+galleryClose.addEventListener(
+  "click",
+  function(){
 
+    galleryViewer.classList.remove("open");
+    galleryViewerImage.src = "";
+
+  }
+);
+
+
+galleryViewer.addEventListener(
+  "click",
+  function(event){
+
+    if(event.target === galleryViewer){
+
+      galleryViewer.classList.remove("open");
+      galleryViewerImage.src = "";
+
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Escape"){
+
+      galleryViewer.classList.remove("open");
+      galleryViewerImage.src = "";
+
+    }
+
+  }
+);
+
+</script><!-- =========================
+     WHATSAPP FORM
+========================= --><script>
+
+function sendForm(event) {
+
+  event.preventDefault();
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const trip =
+    document.getElementById("trip").value.trim();
+
+  const message =
+    document.getElementById("message").value.trim();
+
+
+  const text =
+    "مرحباً Nile Crown Travel!" +
+    "\n\nالاسم: " + name +
+    "\nالبريد الإلكتروني: " + email +
+    "\nالرحلة: " + trip +
+    "\nالرسالة: " + message;
+
+
+  const whatsappUrl =
+    "https://wa.me/201010575983?text=" +
+    encodeURIComponent(text);
+
+
+  window.open(
+    whatsappUrl,
+    "_blank"
+  );
+
+}
+
+</script><!-- =========================
+     MOBILE MENU
+========================= --><script>
+
+const menuBtn =
+  document.getElementById("menuBtn");
+
+const mobileMenu =
+  document.getElementById("mobileMenu");
+
+
+menuBtn.addEventListener(
+  "click",
+  function(){
+
+    mobileMenu.classList.toggle("open");
+
+  }
+);
+
+
+mobileMenu
+  .querySelectorAll("a")
+  .forEach(function(link){
+
+    link.addEventListener(
+      "click",
+      function(){
+
+        mobileMenu.classList.remove("open");
+
+      }
+    );
+
+  });
+
+</script></body>
 </html>

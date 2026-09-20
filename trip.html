@@ -15,6 +15,36 @@
     rel="stylesheet"
     href="style.css?v=2">
 
+  <style>
+
+    /* =========================
+       LOGO
+    ========================= */
+
+    .brand{
+      display:flex;
+      align-items:center;
+      text-decoration:none;
+    }
+
+    .brand-logo{
+      width:72px;
+      height:72px;
+      object-fit:contain;
+      display:block;
+    }
+
+    @media(max-width:600px){
+
+      .brand-logo{
+        width:58px;
+        height:58px;
+      }
+
+    }
+
+  </style>
+
 </head>
 
 
@@ -29,12 +59,10 @@
     class="brand"
     href="index.html">
 
-    <span class="crown">♛</span>
-
-    <span>
-      Nile Crown
-      <small>TRAVEL</small>
-    </span>
+    <img
+      src="logo.png"
+      alt="Nile Crown Travel"
+      class="brand-logo">
 
   </a>
 
@@ -136,7 +164,7 @@
 
 <!-- =========================
      TRIP DETAILS
-     ========================= -->
+========================= -->
 
 <section class="trip-detail">
 
@@ -244,8 +272,7 @@
 
 <!-- =================================================
      LANGUAGE SYSTEM
-     مهم: لازم يشتغل قبل trip.js
-     ================================================= -->
+================================================= -->
 
 <script>
 
@@ -584,15 +611,14 @@
 
 <!-- =========================
      TRIP JS
-     لازم يأتي بعد نظام اللغة
-     ========================= -->
+========================= -->
 
 <script src="trip.js"></script>
 
 
 <!-- =========================
      MOBILE MENU
-     ========================= -->
+========================= -->
 
 <script>
 

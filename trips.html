@@ -8,6 +8,38 @@
   <title>Nile Crown Travel | الرحلات</title>
 
   <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    /* =========================
+       LOGO
+    ========================= */
+
+    .brand{
+      display:flex;
+      align-items:center;
+      text-decoration:none;
+    }
+
+    .brand-logo{
+      width:72px;
+      height:72px;
+      object-fit:contain;
+      display:block;
+    }
+
+
+    @media(max-width:600px){
+
+      .brand-logo{
+        width:58px;
+        height:58px;
+      }
+
+    }
+
+  </style>
+
 </head>
 
 <body>
@@ -15,12 +47,12 @@
 <header class="nav">
 
   <a id="brandLink" class="brand" href="index.html">
-    <span class="crown">♛</span>
 
-    <span>
-      Nile Crown
-      <small>TRAVEL</small>
-    </span>
+    <img
+      src="logo.png"
+      alt="Nile Crown Travel"
+      class="brand-logo">
+
   </a>
 
 
@@ -54,7 +86,7 @@
 
 <!-- =========================
      عنوان الصفحة
-     ========================= -->
+========================= -->
 
 <section class="page-head">
 
@@ -75,7 +107,7 @@
 
 <!-- =========================
      الرحلات
-     ========================= -->
+========================= -->
 
 <section class="section">
 
@@ -92,7 +124,7 @@
 
 <!-- =========================
      Footer
-     ========================= -->
+========================= -->
 
 <footer>
 
@@ -107,7 +139,7 @@
 
 <!-- =========================
      لغة الصفحة
-     ========================= -->
+========================= -->
 
 <script>
 
@@ -302,7 +334,7 @@
 
 <!-- =========================
      تحميل الرحلات من Supabase
-     ========================= -->
+========================= -->
 
 <script src="trips.js"></script>
 

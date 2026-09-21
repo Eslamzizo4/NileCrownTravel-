@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://YOUR-DOMAIN.example/</loc></url>
-  <url><loc>https://YOUR-DOMAIN.example/trips.html</loc></url>
-  <url><loc>https://YOUR-DOMAIN.example/en.html</loc></url>
+
+  <url>
+    <loc>https://eslamzizo4.github.io/NileCrownTravel/</loc>
+  </url>
+
+  <url>
+    <loc>https://eslamzizo4.github.io/NileCrownTravel/en.html</loc>
+  </url>
+
+  <url>
+    <loc>https://eslamzizo4.github.io/NileCrownTravel/trips.html</loc>
+  </url>
+
+  <url>
+    <loc>https://eslamzizo4.github.io/NileCrownTravel/trip.html</loc>
+  </url>
+
 </urlset>
